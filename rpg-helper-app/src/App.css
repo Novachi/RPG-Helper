@@ -1,33 +1,80 @@
-.App {
-  text-align: center;
-}
+* {
+  margin: 0;
+  padding: 0;
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+a {
+  text-decoration: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'Dosis', sans-serif;
+  background-color: gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.Container {
+  margin: 0 auto;
+  width: 60%;
+}
+
+.controls{
+  font-size: 30px;
+  display: inline-block;
+  position: relative;
+  left: 30%;
+}
+
+.button {
+  background-color: brown;
+  border-radius: 4px;
+  padding: 2px;
+  width: 400px;
+  min-height: 100%; /* for the latest browsers which support min-height */
+  height: auto !important; /* for newer IE versions */
+  height: 100%;
+  display: block;
+}
+
+.button:active{
+  background-color: rgb(88, 21, 21);
+}
+
+.control {
+  text-align: center;
+  margin: 10px auto;
+  height: 40px;
+}
+
+
+#sessionsDropdown {
+  color: black;
+  display: block;
+  min-height: 100%; /* for the latest browsers which support min-height */
+  height: auto !important; /* for newer IE versions */
+  height: 100%;
+  width: 100%;
+}
+
+#sessionsDropdown > option {
+  color: black;
+}
+
+.titleDiv {
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+#title {
+  width:20%;
 }
