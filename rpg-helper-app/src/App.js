@@ -15,28 +15,28 @@ class AddSession extends Component {
 class Main extends Component {
   render() {
     return (
-      <div className="App Container">
-        <div className="titleDiv">
+      <div className="main-container">
+        <div className="main-box">
           <h1 id="title">RPG-Helper</h1>
         </div>
-        <div className="controls">
-          <div className="label control">
-            <label>Choose session:</label>
+        <div className="main-box">
+          <div className="second-box">
+            <label className="label">Choose session:</label>
           </div>
-          <div className="control">
+          <div className="second-box">
             <select id="sessionsDropdown">
-              <option>1</option>
-              <option>1</option>
-              <option>1</option>
+              <option className="options">opcja 1</option>
+              <option className="options">to jest opcja 2</option>
+              <option className="options">może opcja 3</option>
             </select>
           </div>
-          <div className="control">
+          <div className="second-box">
             <label className="button"><a href="#">Accept</a></label>
           </div>
-          <div className="control">
+          <div className="second-box">
             <label className="label">Or add a new one:</label>
           </div>
-          <div className="control">
+          <div className="second-box">
             <label className="button"><a href="/add/session">Add session</a></label>
           </div>
         </div>

@@ -15,66 +15,62 @@ html {
 
 body {
   font-family: 'Dosis', sans-serif;
-  background-color: gray;
+  background-color: grey;
+}
+
+.main-container{
+  margin: 25% auto;
+ display: flex;
+ flex-direction: row;
+ flex-wrap: wrap;
+ justify-content: center;
+ text-align: center;
+}
+
+.main-box{
+  
   display: flex;
   flex-direction: column;
+  background-color: rgb(102, 101, 101);
+  width: 45%;
+  margin-right: 5px;
+  margin-left: 5px;
   justify-content: center;
-  height: 100%;
+  border-radius: 10px;
 }
 
-.Container {
-  margin: 0 auto;
-  width: 60%;
+.second-box{
+margin-bottom: 3%;
+font-size: 2.5em;
 }
 
-.controls{
-  font-size: 30px;
-  display: inline-block;
-  position: relative;
-  left: 30%;
+#title{
+  font-size: 5em;
 }
 
-.button {
-  background-color: brown;
-  border-radius: 4px;
-  padding: 2px;
-  width: 400px;
-  min-height: 100%; /* for the latest browsers which support min-height */
-  height: auto !important; /* for newer IE versions */
-  height: 100%;
-  display: block;
-}
-
-.button:active{
-  background-color: rgb(88, 21, 21);
-}
-
-.control {
-  text-align: center;
-  margin: 10px auto;
+#sessionsDropdown{
+  color: black;
+  background-color: rgb(143, 143, 143);
+  font-size: 0.5em;
+  width: 90%;
   height: 40px;
 }
 
-
-#sessionsDropdown {
+.options{
   color: black;
-  display: block;
-  min-height: 100%; /* for the latest browsers which support min-height */
-  height: auto !important; /* for newer IE versions */
-  height: 100%;
-  width: 100%;
+  font-size: 0.75em;
 }
 
-#sessionsDropdown > option {
-  color: black;
+.button{
+  display: inline-block;
+  width: 90%;
+  background-color: rgb(160, 160, 160);
+  border-radius: 10px;
+  border: 2px solid grey;
 }
 
-.titleDiv {
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-}
-
-#title {
-  width:20%;
+.button:hover{
+  background-color: grey;
+  border-radius: 10px;
+  border: 2px solid grey;
 }
