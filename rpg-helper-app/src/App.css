@@ -7,6 +7,7 @@
 
 a {
   text-decoration: none;
+  width:100%;
 }
 
 html {
@@ -16,32 +17,89 @@ html {
 body {
   font-family: 'Dosis', sans-serif;
   background-color: grey;
+  height: 100%;
+  width: 100%;
 }
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+.screen {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: auto;
+}
+
+
 
 .main-container{
-  margin: 25% auto;
- display: flex;
- flex-direction: row;
- flex-wrap: wrap;
- justify-content: center;
- text-align: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-around;
+  height: fit-content;
 }
 
-.main-box{
-  
+.center-container {
   display: flex;
   flex-direction: column;
-  background-color: rgb(102, 101, 101);
-  width: 45%;
-  margin-right: 5px;
-  margin-left: 5px;
+  height: 80%;
   justify-content: center;
-  border-radius: 10px;
+  height: fit-content;
 }
 
+
+.column {
+  flex-direction: column;
+}
+
+.fullscreen {
+  height: 100%;
+}
+
+.main-box{ 
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  min-width: 300px;
+  max-width: 800px;
+  background-color: rgb(102, 101, 101);
+  justify-content: center;
+  border-radius: 10px;
+  margin:  10px;
+  height: fit-content;
+  
+}
+
+.top-center{
+  align-self: center;
+}
+
+
 .second-box{
-margin-bottom: 3%;
-font-size: 2.5em;
+margin: 2%;
+font-size: 2em;
+max-width: 100%;
+
+}
+
+.note{
+  text-align: justify;
+  padding: 0 5px;
+  font-size: 70%;
+  
+}
+
+#date{
+  text-align: left;
+  font-size: 65%;
 }
 
 #title{
@@ -74,3 +132,15 @@ font-size: 2.5em;
   border-radius: 10px;
   border: 2px solid grey;
 }
+
+.button:active{
+  background-color: rgb(100, 100, 100);
+  border-radius: 10px;
+  border: 2px solid grey;
+}
+
+.tab {
+  padding-left: 30px;
+}
+
+
