@@ -6,6 +6,7 @@
 }
 
 a {
+  display: inline-block;
   text-decoration: none;
   width:100%;
 }
@@ -27,24 +28,33 @@ body {
 }
 
 .screen {
-  height: 100%;
-  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   text-align: center;
   overflow: auto;
+  min-height: 100%;
+  height: fit-content;
 }
 
 
+
+
+.main-list-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-around;
+  min-height: 100%;
+}
 
 .main-container{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-content: space-around;
-  height: fit-content;
+  min-height: 100%;
 }
 
 .center-container {
@@ -52,30 +62,41 @@ body {
   flex-direction: column;
   height: 80%;
   justify-content: center;
-  height: fit-content;
 }
 
 
 .column {
+  display: flex;
   flex-direction: column;
-}
-
-.fullscreen {
-  height: 100%;
+  justify-content: center;
+  width: 25%;
+  text-align: left;
 }
 
 .main-box{ 
   display: flex;
   flex-direction: column;
-  width: fit-content;
   min-width: 300px;
-  max-width: 800px;
+  /* max-width: 800px; */
   background-color: rgb(102, 101, 101);
   justify-content: center;
   border-radius: 10px;
   margin:  10px;
-  height: fit-content;
   
+}
+
+.characterCard {
+  width: 75% !important;
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+}
+
+.remove-padding{
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .top-center{
@@ -90,11 +111,15 @@ max-width: 100%;
 
 }
 
+.ryj {
+  padding: 5% 0;
+  margin: 0 auto;
+}
+
 .note{
   text-align: justify;
   padding: 0 5px;
   font-size: 70%;
-  
 }
 
 #date{
@@ -120,6 +145,7 @@ max-width: 100%;
 }
 
 .button{
+  text-align: center;
   display: inline-block;
   width: 90%;
   background-color: rgb(160, 160, 160);
@@ -141,6 +167,30 @@ max-width: 100%;
 
 .tab {
   padding-left: 30px;
+}
+
+/* .addForm {
+  width: 200px;
+  height: 200px;;
+} */
+
+.inputField {
+  color: black;
+  width: 75%;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.inputField:active {
+  outline: none;
+}
+
+.submitButton {
+  border: none;
+  width: 40%;
+  height: 40px;
+  border-radius: 10px;
+  background-color: blueviolet;
 }
 
 

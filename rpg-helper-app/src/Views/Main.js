@@ -26,7 +26,7 @@ class Main extends Component {
                 <label className="label">Or add a new one:</label>
               </div>
               <div className="second-box">
-                <label className="button"><a href="/add/session">Add session</a></label>
+                <label className="button"><a href="/session/add">Add session</a></label>
               </div>
             </div>
           </div>

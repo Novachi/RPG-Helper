@@ -10,7 +10,7 @@ class SessionMenu extends Component {
             </div>
             <div className="main-box">
               <div className="second-box">
-                <label className="button"><a href="/add/character">Add character</a></label>
+                <label className="button"><a href="/character/add">Add character</a></label>
               </div>
               <div className="second-box">
                 <label className="button"><a href="/characters">Show all characters</a></label>
