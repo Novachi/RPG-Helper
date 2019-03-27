@@ -89,6 +89,21 @@ a:visited{
 }
 
 
+/* Characters view */
+
+.section {
+    width: 25%;
+    margin: 0 1.5%;
+}
+
+.sectionItem {
+    margin: 3% 0;
+}
+
+.characterBox {
+    background-color: lawngreen;
+    margin: 2% auto;
+}
 
 /* Notes View Styles */
 
