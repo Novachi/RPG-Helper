@@ -13,16 +13,23 @@ ReactDOM.render(<App />, document.getElementById('root'));
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-let mainList = document.querySelector(".main-list-container");
-let topCenter = document.querySelector(".top-center");
-let topElHeight;
+// let mainList = document.querySelector(".main-list-container");
+let topContainer = document.querySelector(".topContainer")
+let height;
 
-
-let height = document.querySelector(".screen").scrollHeight;
-
-
-if(mainList != null) {
-    topElHeight = topCenter.scrollHeight;
-    height -= topElHeight;
-    mainList.style.height = height + "px";
+let topCenter = document.querySelector(".centeredTopRow");
+if(topCenter != null){
+    height = topContainer.scrollHeight - topCenter.scrollHeight;
+} else {
+    height = topContainer.scrollHeight;
 }
+
+
+document.querySelector(".centeredColumn").style.height = height + "px";
+
+
+// if(mainList != null) {
+//     topElHeight = topCenter.scrollHeight;
+//     height -= topElHeight;
+//     mainList.style.height = height + "px";
+// }

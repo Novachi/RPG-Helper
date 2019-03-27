@@ -1,0 +1,107 @@
+/* CSS preset */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    width: 100%;
+    height: 100%;;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+#root {
+    height: 100%;
+}
+
+a {
+    display: inline-block;
+    text-decoration: none;
+    width:100%;
+}
+
+a:visited{
+    color:black;
+}
+
+/* Containers used for positioning elements */
+
+.topContainer {
+    margin: 0 auto;
+    width: 60%;
+    min-height: 100%;
+    max-height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.centeredTopRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.centeredColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flexContainer {
+    display: flex;
+}
+
+.centeredRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.menuBox {
+    margin: 0 5%;
+    min-height: 200px;
+    width: 200px;
+    text-align: center;
+}
+
+/* Main View Styles */
+
+.button{
+    text-align: center;
+    display: inline-block;
+    width: 90%;
+    background-color: rgb(160, 160, 160);
+    border-radius: 10px;
+    border: 2px solid grey;
+}
+
+
+.button:hover{
+    background-color: grey;
+}
+
+.menuOption {
+    margin: 1.25% 0;
+}
+
+
+
+/* Notes View Styles */
+
+.tab {
+    padding-left: 20px;
+}
+
+#date {
+    font-size: 75%;
+    padding: 1% 0;
+}
+
+.note {
+    margin: 2% auto;
+}
+
