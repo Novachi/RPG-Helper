@@ -68,6 +68,10 @@ a:visited{
     text-align: center;
 }
 
+.justifyTop {
+    justify-content: flex-start;
+}
+
 /* Main View Styles */
 
 .button{
@@ -120,3 +124,35 @@ a:visited{
     margin: 2% auto;
 }
 
+/* AddCharacters View Styles */
+.formSection {
+    width: 33.3%;
+    margin: 0 3%;
+}
+
+.textAreaSection {
+    width: 50%;
+    margin: 0 3%;
+}
+
+form {
+    width: 100%;
+}
+
+.detailsText {
+    resize: none;
+    width: 100%;
+    height: 200px;
+}
+
+.inputSpaceing {
+    margin-top: 5%;
+}
+
+.inputButtonSpaceing{
+    margin-top: 12.5%;
+}
+
+div.inputButtonSpaceing label.button{
+    width: 100%;
+}
