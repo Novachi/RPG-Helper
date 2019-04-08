@@ -5,6 +5,7 @@ class Characters extends Component {
     render() {
       return (
         <div className="topContainer">
+                <a href="/menu"><i class="fas fa-angle-left" id="goBackButton"></i></a>
                 <div className="centeredTopRow">
                     <h1>Characters</h1>
                 </div>

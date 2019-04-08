@@ -17,15 +17,22 @@ serviceWorker.unregister();
 let topContainer = document.querySelector(".topContainer")
 let height;
 
-let topCenter = document.querySelector(".centeredTopRow");
-if(topCenter != null){
-    height = topContainer.scrollHeight - topCenter.scrollHeight;
-} else {
-    height = topContainer.scrollHeight;
+function calculateHeight(){
+    let topCenter = document.querySelector(".centeredTopRow");
+    if(topCenter != null){
+        height = topContainer.scrollHeight - topCenter.scrollHeight;
+    } else {
+        height = topContainer.scrollHeight;
+    }
+
+
+    document.querySelector(".centeredColumn").style.height = height + "px";
 }
 
+calculateHeight();
 
-document.querySelector(".centeredColumn").style.height = height + "px";
+// setInterval(calculateHeight, 1000);
+
 
 
 // if(mainList != null) {

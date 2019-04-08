@@ -1,5 +1,31 @@
 import React, { Component } from 'react';
 
+class StatInput extends Component {
+  constructor(props){
+    super(props);
+  }
+
+  render(){
+    return(
+      <div className={"centeredColumn" + " " + "inputSpaceing"}>
+        <label htmlFor="destinyPoints">{this.props.stat}:</label>
+        <div className="centeredRow">
+          <div className={"statBox" + " " + "centeredColumn"}>
+            <i class="fas fa-minus"></i>
+          </div>
+          <input className={"inputField" + " " + "statBox"} type="text" id="destinyPoints"></input>
+          <div className={"statBox" + " " + "centeredColumn"}>
+              <i class="fas fa-plus"></i>
+          </div>
+          <div className={"statBox" + " " + "centeredColumn"}>
+            <i class="fas fa-dice"></i>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
 
 class AddCharacter extends Component {
   constructor(props){
@@ -52,12 +78,13 @@ class AddCharacter extends Component {
   render() {
     return (
         <div className="topContainer">
+          <a href="/menu"><i class="fas fa-angle-left" id="goBackButton"></i></a>
             <div className="centeredTopRow">
               <h1>Add Character</h1>
             </div>
             <div className="centeredColumn">
               <div className="centeredRow">
-                <form>
+                <form id="characterAdd">
                   <div className={"centeredRow" + " " + "wrap"}>
                     <div className={"centeredColumn" + " " + "formSection" + " " + "justifyTop"}>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
@@ -94,10 +121,7 @@ class AddCharacter extends Component {
                       </div>
                     </div>
                     <div className={"centeredColumn" + " " + "formSection" + " " + "justifyTop"}>
-                      <div className={"centeredColumn" + " " + "inputSpaceing"}>
-                        <label htmlFor="destinyPoints">Destiny points:</label>
-                        <input className="inputField" type="text" id="destinyPoints"></input>
-                      </div>
+                      <StatInput stat="Destiny Points"/>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="closeCombat">Close combat skill:</label>
                         <input className="inputField" type="text" id="closeCombat"></input>
