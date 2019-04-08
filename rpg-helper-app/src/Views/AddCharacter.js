@@ -70,6 +70,18 @@ class AddCharacter extends Component {
     this.handleFormInput = this.handleFormInput.bind(this);
   }
 
+  createStatInputs = (start) => {
+    let statNames = ["Destiny Points", "Close Combat", "Ranged Combat", "Strength", "Resilience", "Agility", "Inteligence", "Mind Strength", "Rhetoric", "Health Points", "Attack limit", " Luck", "Magic Points", "WT", "Madness"];
+    let inputs = []
+    let stop = start==0 ? 8 : 15;
+
+    for (let i = start; i < stop; i++) {
+      inputs.push(<StatInput stat={statNames[i]} />);
+    }
+
+    return inputs;
+  }
+
   handleFormInput(event){
 
   }
@@ -121,65 +133,10 @@ class AddCharacter extends Component {
                       </div>
                     </div>
                     <div className={"centeredColumn" + " " + "formSection" + " " + "justifyTop"}>
-                      <StatInput stat="Destiny Points"/>
-                      <div className={"centeredColumn" + " " + "inputSpaceing"}>
-                        <label htmlFor="closeCombat">Close combat skill:</label>
-                        <input className="inputField" type="text" id="closeCombat"></input>
-                      </div>
-                      <div className={"centeredColumn" + " " + "inputSpaceing"}>
-                        <label htmlFor="rangedCombat">Ranged combat skill:</label>
-                        <input className="inputField" type="text" id="rangedCombat"></input>
-                      </div>
-                      <div className={"centeredColumn" + " " + "inputSpaceing"}>
-                        <label htmlFor="strength">Strength:</label>
-                        <input className="inputField" type="text" id="strength"></input>
-                      </div>
-                      <div className={"centeredColumn" + " " + "inputSpaceing"}>
-                        <label htmlFor="resilience">Resilience:</label>
-                        <input className="inputField" type="text" id="resilience"></input>
-                      </div>
-                      <div className={"centeredColumn" + " " + "inputSpaceing"}>
-                        <label htmlFor="agility">Agility:</label>
-                        <input className="inputField" type="text" id="agility"></input>
-                      </div>
-                      <div className={"centeredColumn" + " " + "inputSpaceing"}>
-                        <label htmlFor="inteligence">Inteligence:</label>
-                        <input className="inputField" type="text" id="inteligence"></input>
-                      </div>
-                      <div className={"centeredColumn" + " " + "inputSpaceing"}>
-                        <label htmlFor="mindStrength">Mind strength:</label>
-                        <input className="inputField" type="text" id="mindStrength"></input>
-                      </div>
+                      {this.createStatInputs(0)}
                     </div>
                     <div className={"centeredColumn" + " " + "formSection" + " " + "justifyTop"}>
-                      <div className={"centeredColumn" + " " + "inputSpaceing"}>
-                        <label htmlFor="rhetoric">Rhetoric:</label>
-                        <input className="inputField" type="text" id="rhetoric"></input>
-                      </div>
-                      <div className={"centeredColumn" + " " + "inputSpaceing"}>
-                        <label htmlFor="health">Health points:</label>
-                        <input className="inputField" type="text" id="health"></input>
-                      </div>
-                      <div className={"centeredColumn" + " " + "inputSpaceing"}>
-                        <label htmlFor="attackLimit">Attack limit:</label>
-                        <input className="inputField" type="text" id="attackLimit"></input>
-                      </div>
-                      <div className={"centeredColumn" + " " + "inputSpaceing"}>
-                        <label htmlFor="luck">Luck:</label>
-                        <input className="inputField" type="text" id="luck"></input>
-                      </div>
-                      <div className={"centeredColumn" + " " + "inputSpaceing"}>
-                        <label htmlFor="magicPoints">Magic points:</label>
-                        <input className="inputField" type="text" id="magicPoints"></input>
-                      </div>
-                      <div className={"centeredColumn" + " " + "inputSpaceing"}>
-                        <label htmlFor="someStat_Wt">someStat_Wt:</label>
-                        <input className="inputField" type="text" id="someStat_Wt"></input>
-                      </div>
-                      <div className={"centeredColumn" + " " + "inputSpaceing"}>
-                        <label htmlFor="madness">Madness:</label>
-                        <input className="inputField" type="text" id="madness"></input>
-                      </div>
+                      {this.createStatInputs(8)}
                       <div className={"centeredColumn" + " " + "inputButtonSpaceing"}>
                         <label className="button"><a href="#randomize">Randomize Stats</a></label>
                       </div>

@@ -221,11 +221,6 @@ div.inputButtonSpaceing label.button{
     width: 100%;
 }
 
-.statInput {
-    width: 25px;
-    height: 25px;
-}
-
 /* Character Details View Styles */
 .characterViewTopSection {
     width: 44%;
@@ -239,7 +234,6 @@ div.inputButtonSpaceing label.button{
 
 .statBox {
     width: 18%;
-
     text-align: center;
     padding: 3% 3%;
     border: 1px solid black;
