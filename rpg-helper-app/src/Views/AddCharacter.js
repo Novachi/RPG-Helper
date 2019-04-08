@@ -9,7 +9,7 @@ class StatInput extends Component {
     return(
       <div className={"centeredColumn" + " " + "inputSpaceing"}>
         <label htmlFor="destinyPoints">{this.props.stat}:</label>
-        <div className="centeredRow">
+        <div className="statsRow">
           <div className={"statBox" + " " + "centeredColumn"}>
             <i class="fas fa-minus"></i>
           </div>
