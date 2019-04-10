@@ -1,5 +1,38 @@
 import React, { Component } from 'react';
 
+class Item extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            items:[{itemName: "Siekierka rozpierdolu", atk:"21", def: "32", weight: "500", details: "Rozpierdalacz to bron, co rozpierdala."}]
+        }
+    }
+
+    render() {
+        return(
+            <div>
+                <div className="item">
+                    <div className={"unchangableRow" + " " + "flexStart"}>
+                        <p>{this.state.items[0].itemName}</p>
+                        <div className="deleteItem">
+                            <i class="fas fa-minus"></i>
+                        </div>
+                    </div>
+                    <div className="details">
+                        <p className="itemStats">
+                            <span className="itemAtk">Atk:<span>{this.state.items[0].atk}</span> | </span>
+                            <span className="itemDef">Def:<span>{this.state.items[0].def}</span> | </span>
+                            Weight: <span>{this.state.items[0].weight}</span> kg
+                        </p>
+                        <p>{this.state.items[0].details}</p>
+                    </div>
+                </div>
+                <div className="line"></div>
+            </div>
+        );
+    }
+}
+
 class StatSection extends Component {
     constructor(props){
         super(props);
@@ -91,73 +124,27 @@ class CharacterDetails extends Component {
                                 <div className="inventorySection">
                                     <h3>Weapons</h3>
                                     <div className="thickLine"></div>
-                                    <div className="item">
-                                        <p>Siekiera rozpierdolu</p>
-                                        <div className="line"></div>
-                                    </div>
-                                    <div className="item">
-                                        <p>Siekiera rozpierdolu</p>
-                                        <div className="line"></div>
-                                    </div>
-                                    <div className="item">
-                                        <p>Siekiera rozpierdolu</p>
-                                        <div className="line"></div>
-                                    </div>
-                                    <div className="item">
-                                        <p>Siekiera rozpierdolu</p>
-                                        <div className="line"></div>
-                                    </div>
-                                    <div className="item">
-                                        <p>Siekiera rozpierdolu</p>
-                                        <div className="line"></div>
-                                    </div>
+                                    <Item />
+                                    <Item />
+                                    <Item />
                                 </div>
                                 <div className="inventorySection">
                                     <h3>Armor</h3>
                                     <div className="thickLine"></div>
-                                    <div className="item">
-                                        <p>Siekiera rozpierdolu</p>
-                                        <div className="line"></div>
-                                    </div>
-                                    <div className="item">
-                                        <p>Siekiera rozpierdolu</p>
-                                        <div className="line"></div>
-                                    </div>
-                                    <div className="item">
-                                        <p>Siekiera rozpierdolu</p>
-                                        <div className="line"></div>
-                                    </div>
-                                    <div className="item">
-                                        <p>Siekiera rozpierdolu</p>
-                                        <div className="line"></div>
-                                    </div>
-                                    <div className="item">
-                                        <p>Siekiera rozpierdolu</p>
-                                        <div className="line"></div>
-                                    </div>
+                                    <Item />
+                                    <Item />
+                                    <Item />
                                 </div>
                                 <div className="inventorySection">
                                     <h3>Misc</h3>
                                     <div className="thickLine"></div>
-                                    <div className="item">
-                                        <p>Siekiera rozpierdolu</p>
-                                        <div className="line"></div>
-                                    </div>
-                                    <div className="item">
-                                        <p>Siekiera rozpierdolu</p>
-                                        <div className="line"></div>
-                                    </div>
-                                    <div className="item">
-                                        <p>Siekiera rozpierdolu</p>
-                                        <div className="line"></div>
-                                    </div>
-                                    <div className="item">
-                                        <p>Siekiera rozpierdolu</p>
-                                        <div className="line"></div>
-                                    </div>
-                                    <div className="item">
-                                        <p>Siekiera rozpierdolu</p>
-                                        <div className="line"></div>
+                                    <Item />
+                                    <Item />
+                                    <Item />
+                                </div>
+                                <div className={"unchangableRow" + " " + "flexEnd"}>
+                                    <div className={"unchangableRow" + " " + "flexEnd"}>
+                                        <i class="fas fa-plus"></i>
                                     </div>
                                 </div>
                             </div>

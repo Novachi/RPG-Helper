@@ -5,19 +5,31 @@ class StatInput extends Component {
     super(props);
   }
 
+  handleButtonChange = (event) => {
+    let id = event.target.key.substring(0, event.target.key.length-1);
+    let element = document.querySelector("#" + id);
+    let value = 0;
+    if(event.target.key.includes("+")){
+      value = parseInt(element.value)+1;
+    } else {
+      value = parseInt(element.value)-1;
+    }
+    element.value = value;
+  }
+
   render(){
     return(
       <div className={"centeredColumn" + " " + "inputSpaceing"}>
         <label htmlFor="destinyPoints">{this.props.stat}:</label>
         <div className="statsRow">
-          <div className={"statBox" + " " + "centeredColumn"}>
+          <div className={"statBox" + " " + "centeredColumn"} key={this.props.id + "-"} onClick={this.handleButtonChange()}>
             <i class="fas fa-minus"></i>
           </div>
-          <input className={"inputField" + " " + "statBox"} type="text" id="destinyPoints"></input>
+          <input className={"inputField" + " " + "statBox"} type="text" id={this.props.id} value="0"></input>
           <div className={"statBox" + " " + "centeredColumn"}>
               <i class="fas fa-plus"></i>
           </div>
-          <div className={"statBox" + " " + "centeredColumn"}>
+          <div className={"statBox" + " " + "centeredColumn"} key={this.props.id + "+"} onClick={this.handleButtonChange()}>
             <i class="fas fa-dice"></i>
           </div>
         </div>
@@ -74,9 +86,11 @@ class AddCharacter extends Component {
     let statNames = ["Destiny Points", "Close Combat", "Ranged Combat", "Strength", "Resilience", "Agility", "Inteligence", "Mind Strength", "Rhetoric", "Health Points", "Attack limit", " Luck", "Magic Points", "WT", "Madness"];
     let inputs = []
     let stop = start==0 ? 8 : 15;
+    let id = 0;
 
     for (let i = start; i < stop; i++) {
-      inputs.push(<StatInput stat={statNames[i]} />);
+      inputs.push(<StatInput stat={statNames[i]} id={id} />);
+      id++;
     }
 
     return inputs;
@@ -152,9 +166,41 @@ class AddCharacter extends Component {
                         <textarea className="detailsText" id="misc"></textarea>
                     </div>
                   </div>
+                  <h1 className="skillName">Skills</h1>
+                    <div className="centeredRow">
+                        <div className={"centeredColumn"  + " " + "characterViewTopSection"}>
+                            <div>
+                                <h3 className="skillName"><input type="checkbox" name="skills"></input>Rozpierdalanie</h3>
+                                <div><strong>Used stat:</strong> WS</div>
+                                <div><strong>Details:</strong> Pozwala na rozpierdalanie przeciwnika, bo tak!</div>
+                                <div className="line"></div>
+                            </div>
+                            <div>
+                                <h3 className="skillName"><input type="checkbox" name="skills"></input>Rozpierdalanie</h3>
+                                <div><strong>Used stat:</strong> WS</div>
+                                <div><strong>Details:</strong> Pozwala na rozpierdalanie przeciwnika, bo tak!</div>
+                                <div className="line"></div>
+                            </div>
+                        </div>
+                
+                        <div className={"centeredColumn"  + " " + "characterViewTopSection"}>
+                            <div>
+                                <h3 className="skillName"><input type="checkbox" name="skills"></input>Rozpierdalanie</h3>
+                                <div><strong>Used stat:</strong> WS</div>
+                                <div><strong>Details:</strong> Pozwala na rozpierdalanie przeciwnika, bo tak!  Pozwala na rozpierdalanie przeciwnika, bo tak!  Pozwala na rozpierdalanie przeciwnika, bo tak!  Pozwala na rozpierdalanie przeciwnika, bo tak!</div>
+                                <div className="line"></div>
+                            </div>
+                            <div>
+                                <h3 className="skillName"><input type="checkbox" name="skills"></input>Rozpierdalanie</h3>
+                                <div><strong>Used stat:</strong> WS</div>
+                                <div><strong>Details:</strong> Pozwala na rozpierdalanie przeciwnika, bo tak!</div>
+                                <div className="line"></div>
+                            </div>
+                        </div>
+                    </div>
                   <div className="centeredRow">
                         <input className="submitButton" type="button" value="Add"></input>
-                    </div>
+                  </div>
                 </form>
               </div>
             </div>

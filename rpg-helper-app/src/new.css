@@ -82,6 +82,11 @@ footer {
     justify-content: center;
 }
 
+.unchangableRow {
+    display: flex;
+    flex-direction: row;
+}
+
 .menuBox {
     margin: 0 5%;
     min-height: 200px;
@@ -129,6 +134,15 @@ footer {
         width: 94% !important;
     }
 } 
+
+.flexEnd {
+    justify-content: flex-end;
+    width: 94%;
+}
+
+.flexStart {
+    justify-content: flex-start;
+}
 
 /* Main View Styles */
 
@@ -311,4 +325,30 @@ hr{
 #portrait {
     margin: 2% auto;
 }
+
+.deleteItem {
+    margin-left: 2%;
+}
+
+p.itemStats {
+    text-align: center;
+}
+
+.details {
+    justify-content: start;
+    flex-direction: column;
+    overflow: visible;
+    height: 0;
+    opacity: 0;
+    transition: height 0.5s, opacity 0.5s;
+}
+
+.unchangableRow:hover + div.details{
+    height: 100%;
+    opacity: 1;
+    margin: 0;
+    background-color:#449877 
+}
+
+
 
