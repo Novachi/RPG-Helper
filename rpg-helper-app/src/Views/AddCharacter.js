@@ -3,18 +3,22 @@ import React, { Component } from 'react';
 class StatInput extends Component {
   constructor(props){
     super(props);
+
+    this.handleButtonChange = this.handleButtonChange.bind(this);
   }
 
-  handleButtonChange = (event) => {
-    let id = event.target.key.substring(0, event.target.key.length-1);
-    let element = document.querySelector("#" + id);
+  handleButtonChange(event){
+    let id = event.currentTarget.id;
+    let element = document.getElementById(id.substring(1));
     let value = 0;
-    if(event.target.key.includes("+")){
+    if(id.includes("+")){
       value = parseInt(element.value)+1;
-    } else {
+    } else if(id.includes("-")) {
       value = parseInt(element.value)-1;
+    } else {
+      value = Math.floor(Math.random() * 60) + 1;
     }
-    element.value = value;
+    element.value = value > 0 ? value : 0;
   }
 
   render(){
@@ -22,14 +26,14 @@ class StatInput extends Component {
       <div className={"centeredColumn" + " " + "inputSpaceing"}>
         <label htmlFor="destinyPoints">{this.props.stat}:</label>
         <div className="statsRow">
-          <div className={"statBox" + " " + "centeredColumn"} key={this.props.id + "-"} onClick={this.handleButtonChange()}>
+          <div className={"statBox" + " " + "centeredColumn" + " " + "statChangeButton"} id={"-" + this.props.id} onClick={this.handleButtonChange}>
             <i class="fas fa-minus"></i>
           </div>
           <input className={"inputField" + " " + "statBox"} type="text" id={this.props.id} value="0"></input>
-          <div className={"statBox" + " " + "centeredColumn"}>
+          <div className={"statBox" + " " + "centeredColumn" + " " + "statChangeButton"} id={"+" + this.props.id} onClick={this.handleButtonChange}>
               <i class="fas fa-plus"></i>
           </div>
-          <div className={"statBox" + " " + "centeredColumn"} key={this.props.id + "+"} onClick={this.handleButtonChange()}>
+          <div className={"statBox" + " " + "centeredColumn" + " " + "statChangeButton"} id={"r" + this.props.id} onClick={this.handleButtonChange}>
             <i class="fas fa-dice"></i>
           </div>
         </div>
@@ -80,13 +84,14 @@ class AddCharacter extends Component {
     }
 
     this.handleFormInput = this.handleFormInput.bind(this);
+    this.handleRandomizeAllButton = this.handleRandomizeAllButton.bind(this);
   }
 
   createStatInputs = (start) => {
     let statNames = ["Destiny Points", "Close Combat", "Ranged Combat", "Strength", "Resilience", "Agility", "Inteligence", "Mind Strength", "Rhetoric", "Health Points", "Attack limit", " Luck", "Magic Points", "WT", "Madness"];
     let inputs = []
-    let stop = start==0 ? 8 : 15;
-    let id = 0;
+    let stop = start===0 ? 8 : 15;
+    let id = start;
 
     for (let i = start; i < stop; i++) {
       inputs.push(<StatInput stat={statNames[i]} id={id} />);
@@ -98,6 +103,13 @@ class AddCharacter extends Component {
 
   handleFormInput(event){
 
+  }
+
+  handleRandomizeAllButton(event){
+    for(let i=0; i<15; i++){
+      let val = Math.floor(Math.random() * 60) + 1;
+      document.getElementById(i).value = val;
+    }
   }
 
 
@@ -152,7 +164,7 @@ class AddCharacter extends Component {
                     <div className={"centeredColumn" + " " + "formSection" + " " + "justifyTop"}>
                       {this.createStatInputs(8)}
                       <div className={"centeredColumn" + " " + "inputButtonSpaceing"}>
-                        <label className="button"><a href="#randomize">Randomize Stats</a></label>
+                        <label className="button" onClick={this.handleRandomizeAllButton}>Randomize Stats</label>
                       </div>
                     </div>
                   </div>

@@ -147,6 +147,7 @@ footer {
 /* Main View Styles */
 
 .button{
+    user-select: none;
     text-align: center;
     display: inline-block;
     width: 90%;
@@ -233,6 +234,14 @@ form#characterAdd {
 
 div.inputButtonSpaceing label.button{
     width: 100%;
+}
+
+.statChangeButton:hover {
+    background-color: #227655;
+}
+
+.statChangeBox:active {
+    background-color: #005433;
 }
 
 /* Character Details View Styles */
