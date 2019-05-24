@@ -8,8 +8,25 @@ import AddSession from './Views/AddSession';
 import Characters from './Views/Characters';
 import AddCharacter from './Views/AddCharacter';
 import CharacterDetails from './Views/CharacterDetails';
+import axios from 'axios';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      skillCount: 0,
+    }
+  }
+
+  componentDidMount(){
+    const url='http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getRecordCount&tableName=skills';
+      axios.get(url)
+      .then(res => {
+        const data = res.data;
+        this.setState({ skillCount:data[0].count });
+    });
+  }
+
   render() {
     return (
       <Router>
@@ -17,7 +34,7 @@ class App extends Component {
           <Route path="/menu" component={SessionMenu}/>
           <Route path="/notes" component={Notes}/>
           <Route path="/session/add" component={AddSession}/>
-          <Route path="/characters/add" component={AddCharacter}/>
+          <Route path="/characters/add" component={() => <AddCharacter skillCount={this.state.skillCount}/>}/>
           <Route exact path="/characters" component={Characters}/>
           <Route path="/characters/character" component={CharacterDetails} />
       </Router>

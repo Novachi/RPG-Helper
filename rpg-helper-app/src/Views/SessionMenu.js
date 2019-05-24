@@ -8,7 +8,7 @@ class SessionMenu extends Component {
           <div className="centeredColumn">
             <div className="centeredRow">
               <div className={"menuBox" + " " + "centeredColumn"}>
-                <h1 id="title">Session</h1>
+                <h1 id="title">{document.cookie.substring(10)}</h1>
               </div>
               <div className={"menuBox" + " " + "centeredColumn"}>
                 <div className="menuOption">

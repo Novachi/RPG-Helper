@@ -1,4 +1,21 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+// import * as Client from 'ssh2-sftp-client';
+
+// var sftp = new Client();
+// sftp.connect({
+//     host: 'v-ie.uek.krakow.pl',
+//     port: '22',
+//     username: 's206775',
+//     password: 'Nowak980304!'
+// }).then(() => {
+//     sftp.fastPut('./object.json','/home/studenci/r15/s206775/public_html/web/files/object.json');
+//     return sftp.list('/home/studenci/r15/s206775/public_html/web/files');
+// }).then((data) => {
+//     console.log(data, 'the data info');
+// }).catch((err) => {
+//     console.log(err, 'catch error');
+// });
 
 class StatInput extends Component {
   constructor(props){
@@ -16,20 +33,21 @@ class StatInput extends Component {
     } else if(id.includes("-")) {
       value = parseInt(element.value)-1;
     } else {
-      value = Math.floor(Math.random() * 60) + 1;
+      value = Math.floor(Math.random() * 41) + 10;
     }
     element.value = value > 0 ? value : 0;
+    element.value = value < 100 ? value : 100;
   }
 
   render(){
     return(
       <div className={"centeredColumn" + " " + "inputSpaceing"}>
-        <label htmlFor="destinyPoints">{this.props.stat}:</label>
+        <label htmlFor={this.props.stat}>{this.props.stat}:</label>
         <div className="statsRow">
           <div className={"statBox" + " " + "centeredColumn" + " " + "statChangeButton"} id={"-" + this.props.id} onClick={this.handleButtonChange}>
             <i class="fas fa-minus"></i>
           </div>
-          <input className={"inputField" + " " + "statBox"} type="text" id={this.props.id} value="0"></input>
+          <input name={this.props.id} className={"inputField" + " " + "statBox"} type="text" id={this.props.id} value="0"></input>
           <div className={"statBox" + " " + "centeredColumn" + " " + "statChangeButton"} id={"+" + this.props.id} onClick={this.handleButtonChange}>
               <i class="fas fa-plus"></i>
           </div>
@@ -42,45 +60,64 @@ class StatInput extends Component {
   }
 }
 
+class SkillInput extends Component {
+  constructor(props){
+    super(props);
+  }
+
+  render(){
+    console.log(this.props.skill);
+    return(
+      <div>
+        <h3 className="skillName"><input type="checkbox" name="skills" value={this.props.skill != undefined ? this.props.skill.skillname : "WOW"}></input>{this.props.skill != undefined ? this.props.skill.skillname : "WOW"}</h3>
+        <div><strong>Used stat:</strong> {this.props.skill != undefined ?this.props.skill.usedstat : "WOW"}</div>
+        <div><strong>Details:</strong> {this.props.skill != undefined ?this.props.skill.details : "WOW"}</div>
+        <div className="line"></div>
+      </div>
+    );
+  }
+}
+
 
 class AddCharacter extends Component {
   constructor(props){
     super(props);
     this.state =  {
       character: {
+        sessionId: parseInt(document.cookie.substring(8,9)),
         name: "",
         race: "",
-        sex: "",
+        gender: "",
         age: 0,
-        height: 0,
-        weight: 0,
-        class: "",
-        background: "",
-        misc: "",
-        closeCombat: 0,
-        rangedCombat: 0,
+        weaponSkill: 0,
+        ballisticSkill: 0,
         strength: 0,
-        resilience: 0,
+        toughness: 0,
         agility: 0,
-        inteligence: 0,
-        mindStrength: 0,
-        rhetoric: 0,
-        health: 0,
-        atackLimit: 0,
-        luck: 0,
-        magicPoints: 0,
-        destinyPoints: 0,
-        someStat_Wt: 0,
-        madness: 0,
-        exp: 0,
+        intelligence: 0,
+        willPower: 0,
+        fellowship: 0,
+        attacks: 0,
+        wounds: 0,
+        strengthBonus: 0,
+        toughnessBonus: 0,
+        movement: 0,
+        magic: 0,
+        insanityPoints: 0,
+        fatePoints: 0,
+        experience: 0,
         gold: 0,
-        inventory: {
-          cap: 0,
-          items: [],
-          armour: [],
-        },
+        imageSrc: "",
+        background: "",
+        additionalInfo: "",
         skills: [],
-      }
+      },
+      skills: [],
+      skillCount: 0,
+      statNames: ["Weapon Skill", "Ballistic Skill", "Strength", "Toughness", "Agility", "Intelligence", "Will Power", "Fellowship", "Wounds",
+       "Attacks", "Magic", " Insanity Points", "Fate Points"],
+      statIds: ["weaponSkill", "ballisticSkill", "strength", "toughness", "agility", "intelligence", "willPower", "fellowship", "wounds",
+       "attacks", "magic", "insanityPoints", "fatePoints", "name", "gender", "age", "race", "class", "height", "weight", "gold", "background", "additionalInfo"],
     }
 
     this.handleFormInput = this.handleFormInput.bind(this);
@@ -88,17 +125,25 @@ class AddCharacter extends Component {
   }
 
   createStatInputs = (start) => {
-    let statNames = ["Destiny Points", "Close Combat", "Ranged Combat", "Strength", "Resilience", "Agility", "Inteligence", "Mind Strength", "Rhetoric", "Health Points", "Attack limit", " Luck", "Magic Points", "WT", "Madness"];
     let inputs = []
-    let stop = start===0 ? 8 : 15;
-    let id = start;
+    let stop = start===0 ? 7 : 13;
 
     for (let i = start; i < stop; i++) {
-      inputs.push(<StatInput stat={statNames[i]} id={id} />);
-      id++;
+      inputs.push(<StatInput stat={this.state.statNames[i]} id={this.state.statIds[i]} />);
     }
 
     return inputs;
+  }
+
+  createSkillInputs = (start,stop) => {
+    let skillInputs = [];
+    console.log("WOW!")
+    for(let i = start; i < stop; i++){
+      console.log(this.state.skills[i]);
+      skillInputs.push(<SkillInput skill={this.state.skills[i]} />);
+    }
+
+    return skillInputs;
   }
 
   handleFormInput(event){
@@ -106,63 +151,126 @@ class AddCharacter extends Component {
   }
 
   handleRandomizeAllButton(event){
-    for(let i=0; i<15; i++){
-      let val = Math.floor(Math.random() * 60) + 1;
-      document.getElementById(i).value = val;
+    for(let i=0; i<13; i++){
+      let val = Math.floor(Math.random() * 41) + 10;
+      document.getElementById(this.state.statIds[i]).value = val;
     }
   }
 
+  handleAddButton = () => {
+
+    for(let i=0; i<this.state.statIds.length; i++){
+        let re = /^\d+$/g;
+        let val = document.getElementById(this.state.statIds[i]).value;
+        this.state.character[this.state.statIds[i]] = re.test(val) ? parseInt(val) : val;
+    }
+
+    let skillInputs = document.getElementsByName("skills");
+    for(let i=0; i<skillInputs.length; i++){
+      if(skillInputs[i].checked){
+        this.state.character.skills.push(skillInputs[i].value);
+      }
+    }
+
+    // sftp.connect({
+    //   host: 'v-ie.uek.krakow.pl',
+    //   port: '22',
+    //   username: 's206775',
+    //   password: 'Nowak980304!'
+    // }).then(() => {
+    //     sftp.put(JSON.stringify(this.state.character),'/home/studenci/r15/s206775/public_html/web/files/character.json');
+    //     return sftp.list('/home/studenci/r15/s206775/public_html/web/files');
+    // }).then((data) => {
+    //     console.log(data, 'the data info');
+    // }).catch((err) => {
+    //     console.log(err, 'catch error');
+    // });
+
+    console.log(this.state.character);
+  }
+
+  componentWillMount(){
+    const url='http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getElements&tableName=skills';
+      axios.get(url)
+      .then(res => {
+        const data = res.data;
+        this.setState({ skills:data});
+    });
+
+    
+  }
+
+  componentWillUpdate(){
+    console.log("HERE")
+    let topContainer = document.querySelector(".topContainer")
+    let height;
+
+    function calculateHeight(){
+        let topCenter = document.querySelector(".centeredTopRow");
+        if(topCenter != null){
+            height = topContainer.scrollHeight - topCenter.scrollHeight;
+        } else {
+            height = topContainer.scrollHeight;
+        }
+
+
+        document.querySelector(".centeredColumn").style.height = height + "px";
+    }
+
+    calculateHeight();
+  }
 
   render() {
+    console.log(this.state.skillCount);
     return (
         <div className="topContainer">
           <a href="/menu"><i class="fas fa-angle-left" id="goBackButton"></i></a>
             <div className="centeredTopRow">
-              <h1>Add Character</h1>
+              <h1>Add Character to {document.cookie.substring(10)}</h1>
             </div>
             <div className="centeredColumn">
               <div className="centeredRow">
-                <form id="characterAdd">
+                <form id="characterAdd" method="POST" action="http://v-ie.uek.krakow.pl/~s206775/cokolwiek.php">
                   <div className={"centeredRow" + " " + "wrap"}>
                     <div className={"centeredColumn" + " " + "formSection" + " " + "justifyTop"}>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="name">Name:</label>
-                        <input className="inputField" type="text" id="name"></input>
+                        <input name="name" className="inputField" type="text" id="name"></input>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="sex">Gender:</label>
-                        <input className="inputField" type="text" id="sex"></input>
+                        <input name="gender" className="inputField" type="text" id="gender"></input>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="age">Age:</label>
-                        <input className="inputField" type="text" id="age"></input>
+                        <input name="age" className="inputField" type="text" id="age"></input>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="Race">Race:</label>
-                        <input className="inputField" type="text"></input>
+                        <input name="race" className="inputField" type="text" id="race"></input>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="class">Class:</label>
-                        <input className="inputField" type="text" id="class"></input>
+                        <input name="class" className="inputField" type="text" id="class"></input>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="height">Height(cm):</label>
-                        <input className="inputField" type="text" id="height"></input>
+                        <input name="height" className="inputField" type="text" id="height"></input>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="weight">Weight(kg):</label>
-                        <input className="inputField" type="text" id="weight"></input>
+                        <input name="weight" className="inputField" type="text" id="weight"></input>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="gold">Gold:</label>
-                        <input className="inputField" type="text" id="gold"></input>
+                        <input name="gold" className="inputField" type="text" id="gold"></input>
                       </div>
                     </div>
                     <div className={"centeredColumn" + " " + "formSection" + " " + "justifyTop"}>
                       {this.createStatInputs(0)}
                     </div>
                     <div className={"centeredColumn" + " " + "formSection" + " " + "justifyTop"}>
-                      {this.createStatInputs(8)}
+                      {this.createStatInputs(7)}
                       <div className={"centeredColumn" + " " + "inputButtonSpaceing"}>
                         <label className="button" onClick={this.handleRandomizeAllButton}>Randomize Stats</label>
                       </div>
@@ -171,47 +279,25 @@ class AddCharacter extends Component {
                   <div className="centeredRow">
                     <div className={"centeredColumn" + " " + "textAreaSection" + " " + "inputSpaceing"}>
                         <label htmlFor="background">Background:</label>
-                        <textarea className="detailsText" id="background"></textarea>
+                        <textarea name="background" className="detailsText" id="background"></textarea>
                     </div>
                     <div className={"centeredColumn" + " " + "textAreaSection" + " " + "inputSpaceing"}>
                         <label htmlFor="misc">Additional info:</label>
-                        <textarea className="detailsText" id="misc"></textarea>
+                        <textarea name="additionalInfo" className="detailsText" id="additionalInfo"></textarea>
                     </div>
                   </div>
                   <h1 className="skillName">Skills</h1>
                     <div className="centeredRow">
                         <div className={"centeredColumn"  + " " + "characterViewTopSection"}>
-                            <div>
-                                <h3 className="skillName"><input type="checkbox" name="skills"></input>Rozpierdalanie</h3>
-                                <div><strong>Used stat:</strong> WS</div>
-                                <div><strong>Details:</strong> Pozwala na rozpierdalanie przeciwnika, bo tak!</div>
-                                <div className="line"></div>
-                            </div>
-                            <div>
-                                <h3 className="skillName"><input type="checkbox" name="skills"></input>Rozpierdalanie</h3>
-                                <div><strong>Used stat:</strong> WS</div>
-                                <div><strong>Details:</strong> Pozwala na rozpierdalanie przeciwnika, bo tak!</div>
-                                <div className="line"></div>
-                            </div>
+                            {this.createSkillInputs(0,Math.ceil(this.props.skillCount/2))}
                         </div>
                 
                         <div className={"centeredColumn"  + " " + "characterViewTopSection"}>
-                            <div>
-                                <h3 className="skillName"><input type="checkbox" name="skills"></input>Rozpierdalanie</h3>
-                                <div><strong>Used stat:</strong> WS</div>
-                                <div><strong>Details:</strong> Pozwala na rozpierdalanie przeciwnika, bo tak!  Pozwala na rozpierdalanie przeciwnika, bo tak!  Pozwala na rozpierdalanie przeciwnika, bo tak!  Pozwala na rozpierdalanie przeciwnika, bo tak!</div>
-                                <div className="line"></div>
-                            </div>
-                            <div>
-                                <h3 className="skillName"><input type="checkbox" name="skills"></input>Rozpierdalanie</h3>
-                                <div><strong>Used stat:</strong> WS</div>
-                                <div><strong>Details:</strong> Pozwala na rozpierdalanie przeciwnika, bo tak!</div>
-                                <div className="line"></div>
-                            </div>
+                            {this.createSkillInputs(Math.ceil(this.props.skillCount/2),this.props.skillCount)}
                         </div>
                     </div>
                   <div className="centeredRow">
-                        <input className="submitButton" type="button" value="Add"></input>
+                        <input className="submitButton" type="submit" value="Add" onClick={this.handleAddButton}></input>
                   </div>
                 </form>
               </div>

@@ -7,7 +7,7 @@ class Characters extends Component {
         <div className="topContainer">
                 <a href="/menu"><i class="fas fa-angle-left" id="goBackButton"></i></a>
                 <div className="centeredTopRow">
-                    <h1>Characters</h1>
+                    <h1>{document.cookie.substring(8)} - Characters</h1>
                 </div>
                 <div className="centeredColumn">
                     <div className={"centeredRow" + " " + "characterBox"}>
