@@ -1,21 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import * as Client from 'ssh2-sftp-client';
-
-// var sftp = new Client();
-// sftp.connect({
-//     host: 'v-ie.uek.krakow.pl',
-//     port: '22',
-//     username: 's206775',
-//     password: 'Nowak980304!'
-// }).then(() => {
-//     sftp.fastPut('./object.json','/home/studenci/r15/s206775/public_html/web/files/object.json');
-//     return sftp.list('/home/studenci/r15/s206775/public_html/web/files');
-// }).then((data) => {
-//     console.log(data, 'the data info');
-// }).catch((err) => {
-//     console.log(err, 'catch error');
-// });
 
 class StatInput extends Component {
   constructor(props){
@@ -45,14 +29,14 @@ class StatInput extends Component {
         <label htmlFor={this.props.stat}>{this.props.stat}:</label>
         <div className="statsRow">
           <div className={"statBox" + " " + "centeredColumn" + " " + "statChangeButton"} id={"-" + this.props.id} onClick={this.handleButtonChange}>
-            <i class="fas fa-minus"></i>
+            <i className="fas fa-minus"></i>
           </div>
-          <input name={this.props.id} className={"inputField" + " " + "statBox"} type="text" id={this.props.id} value="0"></input>
+          <input name={this.props.id} className={"inputField" + " " + "statBox"} type="number" id={this.props.id} value="0"></input>
           <div className={"statBox" + " " + "centeredColumn" + " " + "statChangeButton"} id={"+" + this.props.id} onClick={this.handleButtonChange}>
-              <i class="fas fa-plus"></i>
+              <i className="fas fa-plus"></i>
           </div>
           <div className={"statBox" + " " + "centeredColumn" + " " + "statChangeButton"} id={"r" + this.props.id} onClick={this.handleButtonChange}>
-            <i class="fas fa-dice"></i>
+            <i className="fas fa-dice"></i>
           </div>
         </div>
       </div>
@@ -66,10 +50,9 @@ class SkillInput extends Component {
   }
 
   render(){
-    console.log(this.props.skill);
     return(
       <div>
-        <h3 className="skillName"><input type="checkbox" name="skills" value={this.props.skill != undefined ? this.props.skill.skillname : "WOW"}></input>{this.props.skill != undefined ? this.props.skill.skillname : "WOW"}</h3>
+        <h3 className="skillName"><input type="checkbox" name="skills[]" value={this.props.skill != undefined ? this.props.skill.skillname : "WOW"}></input>{this.props.skill != undefined ? this.props.skill.skillname : "WOW"}</h3>
         <div><strong>Used stat:</strong> {this.props.skill != undefined ?this.props.skill.usedstat : "WOW"}</div>
         <div><strong>Details:</strong> {this.props.skill != undefined ?this.props.skill.details : "WOW"}</div>
         <div className="line"></div>
@@ -119,15 +102,12 @@ class AddCharacter extends Component {
       statIds: ["weaponSkill", "ballisticSkill", "strength", "toughness", "agility", "intelligence", "willPower", "fellowship", "wounds",
        "attacks", "magic", "insanityPoints", "fatePoints", "name", "gender", "age", "race", "class", "height", "weight", "gold", "background", "additionalInfo"],
     }
-
-    this.handleFormInput = this.handleFormInput.bind(this);
     this.handleRandomizeAllButton = this.handleRandomizeAllButton.bind(this);
   }
 
   createStatInputs = (start) => {
     let inputs = []
     let stop = start===0 ? 7 : 13;
-
     for (let i = start; i < stop; i++) {
       inputs.push(<StatInput stat={this.state.statNames[i]} id={this.state.statIds[i]} />);
     }
@@ -137,17 +117,13 @@ class AddCharacter extends Component {
 
   createSkillInputs = (start,stop) => {
     let skillInputs = [];
-    console.log("WOW!")
     for(let i = start; i < stop; i++){
-      console.log(this.state.skills[i]);
-      skillInputs.push(<SkillInput skill={this.state.skills[i]} />);
+      if(this.state.skills != undefined){
+        skillInputs.push(<SkillInput skill={this.state.skills[i]} />);
+      }
     }
 
     return skillInputs;
-  }
-
-  handleFormInput(event){
-
   }
 
   handleRandomizeAllButton(event){
@@ -157,80 +133,30 @@ class AddCharacter extends Component {
     }
   }
 
-  handleAddButton = () => {
-
-    for(let i=0; i<this.state.statIds.length; i++){
-        let re = /^\d+$/g;
-        let val = document.getElementById(this.state.statIds[i]).value;
-        this.state.character[this.state.statIds[i]] = re.test(val) ? parseInt(val) : val;
-    }
-
-    let skillInputs = document.getElementsByName("skills");
-    for(let i=0; i<skillInputs.length; i++){
-      if(skillInputs[i].checked){
-        this.state.character.skills.push(skillInputs[i].value);
-      }
-    }
-
-    // sftp.connect({
-    //   host: 'v-ie.uek.krakow.pl',
-    //   port: '22',
-    //   username: 's206775',
-    //   password: 'Nowak980304!'
-    // }).then(() => {
-    //     sftp.put(JSON.stringify(this.state.character),'/home/studenci/r15/s206775/public_html/web/files/character.json');
-    //     return sftp.list('/home/studenci/r15/s206775/public_html/web/files');
-    // }).then((data) => {
-    //     console.log(data, 'the data info');
-    // }).catch((err) => {
-    //     console.log(err, 'catch error');
-    // });
-
-    console.log(this.state.character);
-  }
-
-  componentWillMount(){
-    const url='http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getElements&tableName=skills';
-      axios.get(url)
+  getSkills = async () => {
+    let url='http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getElements&tableName=skills';
+    await axios.get(url)
       .then(res => {
         const data = res.data;
-        this.setState({ skills:data});
-    });
-
-    
+        this.setState({skills: data});
+      });
   }
 
-  componentWillUpdate(){
-    console.log("HERE")
-    let topContainer = document.querySelector(".topContainer")
-    let height;
-
-    function calculateHeight(){
-        let topCenter = document.querySelector(".centeredTopRow");
-        if(topCenter != null){
-            height = topContainer.scrollHeight - topCenter.scrollHeight;
-        } else {
-            height = topContainer.scrollHeight;
-        }
-
-
-        document.querySelector(".centeredColumn").style.height = height + "px";
-    }
-
-    calculateHeight();
+  componentDidMount(){
+    this.getSkills();
   }
 
   render() {
-    console.log(this.state.skillCount);
     return (
         <div className="topContainer">
-          <a href="/menu"><i class="fas fa-angle-left" id="goBackButton"></i></a>
+          <a href="/menu"><i className="fas fa-angle-left" id="goBackButton"></i></a>
             <div className="centeredTopRow">
               <h1>Add Character to {document.cookie.substring(10)}</h1>
             </div>
             <div className="centeredColumn">
               <div className="centeredRow">
-                <form id="characterAdd" method="POST" action="http://v-ie.uek.krakow.pl/~s206775/cokolwiek.php">
+                <form id="characterAdd" method="POST" action="http://v-ie.uek.krakow.pl/~s206775/addCharacter.php" encType="multipart/form-data">
+                  <input id="sessionId" name="sessionId" type="hidden" value={this.state.character.sessionId}/>
                   <div className={"centeredRow" + " " + "wrap"}>
                     <div className={"centeredColumn" + " " + "formSection" + " " + "justifyTop"}>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
@@ -255,15 +181,20 @@ class AddCharacter extends Component {
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="height">Height(cm):</label>
-                        <input name="height" className="inputField" type="text" id="height"></input>
+                        <input name="height" className="inputField" type="number" id="height"></input>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="weight">Weight(kg):</label>
-                        <input name="weight" className="inputField" type="text" id="weight"></input>
+                        <input name="weight" className="inputField" type="number" id="weight"></input>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="gold">Gold:</label>
-                        <input name="gold" className="inputField" type="text" id="gold"></input>
+                        <input name="gold" className="inputField" type="number" id="gold"></input>
+                      </div>
+                      <div className={"centeredColumn" + " " + "inputSpaceing"}>
+                        <label>Character image(2MB):</label>
+                        <input type="hidden" name="max_file_size" value="2000000"/>
+                        <input type="file" name="imageSrc" id="imageSrc" accept=".png, .jpg, .jpeg"/>
                       </div>
                     </div>
                     <div className={"centeredColumn" + " " + "formSection" + " " + "justifyTop"}>
@@ -286,6 +217,7 @@ class AddCharacter extends Component {
                         <textarea name="additionalInfo" className="detailsText" id="additionalInfo"></textarea>
                     </div>
                   </div>
+                  
                   <h1 className="skillName">Skills</h1>
                     <div className="centeredRow">
                         <div className={"centeredColumn"  + " " + "characterViewTopSection"}>
@@ -296,6 +228,7 @@ class AddCharacter extends Component {
                             {this.createSkillInputs(Math.ceil(this.props.skillCount/2),this.props.skillCount)}
                         </div>
                     </div>
+                  <input type="hidden" name="characterId" value={this.props.nextCharacterId} />
                   <div className="centeredRow">
                         <input className="submitButton" type="submit" value="Add" onClick={this.handleAddButton}></input>
                   </div>

@@ -26,6 +26,7 @@ a {
     display: inline-block;
     text-decoration: none;
     width:100%;
+    color:black;
 }
 
 a:visited{
@@ -46,6 +47,12 @@ footer {
     top: 7px;
     left: 25px;
     font-size: 4em;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
 
 /* Containers used for positioning elements */
@@ -157,7 +164,7 @@ footer {
 }
 
 
-.button:hover{
+.button:hover, .editButton:hover{
     background-color: grey;
 }
 
@@ -178,7 +185,7 @@ footer {
 }
 
 .characterBox {
-    background-color: lawngreen;
+    background-color: #99FFBB;
     margin: 2% auto;
 }
 
@@ -201,6 +208,28 @@ footer {
 
 .note {
     margin: 2% auto;
+}
+
+.editButton {
+    user-select: none;
+    text-align: center;
+    width: 100px;
+    background-color: rgb(160, 160, 160);
+    border-radius: 10px;
+    border: 2px solid grey;
+}
+
+.editField {
+    width:100%;
+}
+
+#addButton{
+    width: 200px;
+}
+
+.addField {
+    width:100%;
+    text-align: right;
 }
 
 /* AddCharacters View Styles */
@@ -357,6 +386,13 @@ p.itemStats {
     opacity: 1;
     margin: 0;
     background-color:#449877 
+}
+
+/* AddNote view styles */
+
+#noteInput {
+    width: 300px;
+    height: 300px;  
 }
 
 

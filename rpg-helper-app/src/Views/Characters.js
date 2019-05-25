@@ -7,7 +7,7 @@ class Characters extends Component {
         <div className="topContainer">
                 <a href="/menu"><i class="fas fa-angle-left" id="goBackButton"></i></a>
                 <div className="centeredTopRow">
-                    <h1>{document.cookie.substring(8)} - Characters</h1>
+                    <h1>{document.cookie.substring(10)} - Characters</h1>
                 </div>
                 <div className="centeredColumn">
                     <div className={"centeredRow" + " " + "characterBox"}>
@@ -27,7 +27,7 @@ class Characters extends Component {
                             <div className={ "centeredColumn" + " " + "section"}>
                                 <div className="sectionItem">Sex: Male</div>
                                 <div className="sectionItem">Available Exp: 200</div>
-                                <div className="sectionItem"><label className="button"><a href="/characters/character">Details</a></label></div>
+                                <div className="sectionItem"><label className="button"><a href="/characters/show/1">Details</a></label></div>
                             </div> 
                     </div>
                     <div className={"centeredRow" + " " + "characterBox"}>
