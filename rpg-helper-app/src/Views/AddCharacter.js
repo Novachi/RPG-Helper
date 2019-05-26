@@ -101,19 +101,19 @@ class AddCharacter extends Component {
        "Attacks", "Magic", " Insanity Points", "Fate Points"],
       statIds: ["weaponSkill", "ballisticSkill", "strength", "toughness", "agility", "intelligence", "willPower", "fellowship", "wounds",
        "attacks", "magic", "insanityPoints", "fatePoints", "name", "gender", "age", "race", "class", "height", "weight", "gold", "background", "additionalInfo"],
-    }
+    };
     this.handleRandomizeAllButton = this.handleRandomizeAllButton.bind(this);
   }
 
   createStatInputs = (start) => {
-    let inputs = []
+    let inputs = [];
     let stop = start===0 ? 7 : 13;
     for (let i = start; i < stop; i++) {
       inputs.push(<StatInput stat={this.state.statNames[i]} id={this.state.statIds[i]} />);
     }
 
     return inputs;
-  }
+  };
 
   createSkillInputs = (start,stop) => {
     let skillInputs = [];
@@ -124,7 +124,7 @@ class AddCharacter extends Component {
     }
 
     return skillInputs;
-  }
+  };
 
   handleRandomizeAllButton(event){
     for(let i=0; i<13; i++){
@@ -140,7 +140,7 @@ class AddCharacter extends Component {
         const data = res.data;
         this.setState({skills: data});
       });
-  }
+  };
 
   componentDidMount(){
     this.getSkills();
@@ -161,35 +161,35 @@ class AddCharacter extends Component {
                     <div className={"centeredColumn" + " " + "formSection" + " " + "justifyTop"}>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="name">Name:</label>
-                        <input name="name" className="inputField" type="text" id="name"></input>
+                        <input name="name" className="inputField" type="text" id="name"/>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="sex">Gender:</label>
-                        <input name="gender" className="inputField" type="text" id="gender"></input>
+                        <input name="gender" className="inputField" type="text" id="gender"/>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="age">Age:</label>
-                        <input name="age" className="inputField" type="text" id="age"></input>
+                        <input name="age" className="inputField" type="text" id="age"/>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="Race">Race:</label>
-                        <input name="race" className="inputField" type="text" id="race"></input>
+                        <input name="race" className="inputField" type="text" id="race"/>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="class">Class:</label>
-                        <input name="class" className="inputField" type="text" id="class"></input>
+                        <input name="class" className="inputField" type="text" id="class"/>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="height">Height(cm):</label>
-                        <input name="height" className="inputField" type="number" id="height"></input>
+                        <input name="height" className="inputField" type="number" id="height"/>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="weight">Weight(kg):</label>
-                        <input name="weight" className="inputField" type="number" id="weight"></input>
+                        <input name="weight" className="inputField" type="number" id="weight"/>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="gold">Gold:</label>
-                        <input name="gold" className="inputField" type="number" id="gold"></input>
+                        <input name="gold" className="inputField" type="number" id="gold"/>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label>Character image(2MB):</label>

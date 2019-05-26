@@ -208,6 +208,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .note {
     margin: 2% auto;
+    width: 96%;
 }
 
 .editButton {

@@ -66,12 +66,15 @@ class App extends Component {
       var followingNoteId = this.state.requestsData[3][0].max == null ? 1 : this.state.requestsData[3][0].max;
       var followingCharacterId = this.state.requestsData[4][0].max == null ? 1 : this.state.requestsData[4][0].max;
     }
+
+      let regex = /session=\d+/g;
+      let sessionId = parseInt(document.cookie.match(regex)[0].substring(8));
     
     return (
       <Router>
           <Route exact path="/" component={Main}/>
           <Route path="/menu" component={SessionMenu}/>
-          <Route exact path="/notes" component={() => <Notes notesCount={notesNumber} nextNoteId={followingNoteId} />}/>
+          <Route exact path="/notes" component={() => <Notes notesCount={notesNumber} nextNoteId={followingNoteId} sessionId={sessionId}/>}/>
           <Route path="/session/add" component={AddSession}/>
           <Route path="/characters/add" component={() => <AddCharacter nextCharacterId={followingCharacterId} skillCount={skillsNumber}/>}/>
           <Route exact path="/characters" component={() => <Characters characterCount={charactersNumber} />}/>

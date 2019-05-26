@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from "axios";
 
 class Note extends Component{
     render(){
@@ -8,7 +9,7 @@ class Note extends Component{
                         <h3 className="date">{this.props.date}</h3>
                 </div>
                 <div className="editField">
-                    <a class="editButton" href={"/notes/edit/" + this.props.id}>Edit</a>
+                    <a className="editButton" href={"/notes/edit/" + this.props.id}>Edit</a>
                 </div>
                 <div>
                     <p><span className="tab"> </span>{this.props.note}</p>
@@ -20,14 +21,38 @@ class Note extends Component{
 
 class Notes extends Component {
 
+    constructor(props){
+        super(props);
+        this.state = {
+            notes:[],
+        }
+    }
+
+
+    getNotes = async () => {
+        let url='http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getNotes&sessionId=' + this.props.sessionId;
+        await axios.get(url)
+            .then(res => {
+                const data = res.data;
+                this.setState({notes: data});
+            });
+    };
+
 
     createNotes = () => {
-        let notes = []
-        for(let i=0; i<10; i++){
-            notes.push(<Note id={i} date="22.01.2019 22:22" note="Jarek poszedl po piwo i kupil dwa zamiast jednego Jarek poszedl po piwo i kupil dwa zamiast jednego Jarek poszedl po piwo i kupil dwa zamiast jednego Jarek poszedl po piwo i kupil dwa zamiast jednego Jarek poszedl po piwo i kupil dwa zamiast jednego"/>);
+        let notes = [];
+        for(let i=0; i<this.props.notesCount; i++){
+            if(this.state.notes[i] != undefined) {
+                notes.push(<Note id={this.state.notes[i].noteid} date={this.state.notes[i].notedate.substring(0,16)}
+                                 note={this.state.notes[i].note}/>);
+            }
         }
 
         return notes;
+    };
+
+    componentDidMount() {
+        this.getNotes();
     }
 
     render(){
@@ -44,7 +69,7 @@ class Notes extends Component {
                     </div>
 
                     <div className="addField">
-                        <a id="addButton" class="editButton" href={"/notes/add/" + this.props.nextNoteId}>Add New Note</a>
+                        <a id="addButton" className="editButton" href={"/notes/add/" + (this.props.nextNoteId +1)}>Add New Note</a>
                     </div>
 
                 </div>
