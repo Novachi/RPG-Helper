@@ -39,9 +39,6 @@ class Main extends Component {
     }
 
     render() {
-      
-      console.log("WOW")
-
       return (
         <div className="topContainer">
           <div className="centeredColumn">

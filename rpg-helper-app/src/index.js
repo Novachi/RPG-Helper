@@ -14,7 +14,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 serviceWorker.unregister();
 
 // let mainList = document.querySelector(".main-list-container");
-let topContainer = document.querySelector(".topContainer")
+let topContainer = document.querySelector(".topContainer");
 let height;
 
 function calculateHeight(){

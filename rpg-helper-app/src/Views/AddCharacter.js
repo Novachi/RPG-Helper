@@ -147,6 +147,7 @@ class AddCharacter extends Component {
   }
 
   render() {
+      console.log(this.props.nextCharacterId);
     return (
         <div className="topContainer">
           <a href="/menu"><i className="fas fa-angle-left" id="goBackButton"></i></a>
