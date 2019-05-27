@@ -2,6 +2,17 @@ import React, { Component } from 'react';
 import axios from "axios";
 
 class Note extends Component{
+    constructor(props){
+        super(props);
+        this.state = {};
+    }
+
+    deleteNote = () =>{
+        let url='http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=deleteNote&noteId=' + this.props.id;
+        axios.get(url).then(() => this.props.reload());
+
+    };
+
     render(){
         return(
             <div className="note">
@@ -9,7 +20,8 @@ class Note extends Component{
                         <h3 className="date">{this.props.date}</h3>
                 </div>
                 <div className="editField">
-                    <a className="editButton" href={"/notes/edit/" + this.props.id}>Edit</a>
+                    <button className="editButton"><a href={"/notes/edit/" + this.props.id}><i className="fas fa-edit"></i></a></button>
+                    <button className="editButton" onClick={this.deleteNote}><i className="fas fa-trash-alt"></i></button>
                 </div>
                 <div>
                     <p><span className="tab"> </span>{this.props.note}</p>
@@ -25,9 +37,14 @@ class Notes extends Component {
         super(props);
         this.state = {
             notes:[],
-        }
+        };
+
+        this.reload = this.reload.bind(this);
     }
 
+    reload(){
+        this.getNotes();
+    };
 
     getNotes = async () => {
         let url='http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getNotes&sessionId=' + this.props.sessionId;
@@ -44,7 +61,7 @@ class Notes extends Component {
         for(let i=0; i<this.props.notesCount; i++){
             if(this.state.notes[i] != undefined) {
                 notes.push(<Note id={this.state.notes[i].noteid} date={this.state.notes[i].notedate.substring(0,16)}
-                                 note={this.state.notes[i].note}/>);
+                                 note={this.state.notes[i].note} reload={this.reload}/>);
             }
         }
 
