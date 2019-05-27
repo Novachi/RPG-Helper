@@ -27,7 +27,7 @@ class Characters extends Component {
                             <div className={ "centeredColumn" + " " + "section"}>
                                 <div className="sectionItem">Sex: Male</div>
                                 <div className="sectionItem">Available Exp: 200</div>
-                                <div className="sectionItem"><label className="button"><a href="/characters/show/1">Details</a></label></div>
+                                <div className="sectionItem"><label className="button"><a href="/characters/1">Details</a></label></div>
                             </div> 
                     </div>
                     <div className={"centeredRow" + " " + "characterBox"}>

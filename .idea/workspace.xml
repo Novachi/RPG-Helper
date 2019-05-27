@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="02f1938e-61e9-49f6-8140-0c7dbb2f4757" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpg-helper-app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/rpg-helper-app/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpg-helper-app/src/Views/AddCharacter.js" beforeDir="false" afterPath="$PROJECT_DIR$/rpg-helper-app/src/Views/AddCharacter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpg-helper-app/src/Views/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/rpg-helper-app/src/Views/Main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpg-helper-app/src/Views/SessionMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/rpg-helper-app/src/Views/SessionMenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpg-helper-app/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/rpg-helper-app/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpg-helper-app/src/Views/Characters.js" beforeDir="false" afterPath="$PROJECT_DIR$/rpg-helper-app/src/Views/Characters.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -64,14 +60,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rpg-helper-app/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="366">
-              <caret line="83" column="128" selection-start-line="83" selection-start-column="128" selection-end-line="83" selection-end-column="128" />
+              <caret line="83" column="22" selection-start-line="83" selection-start-column="22" selection-end-line="83" selection-end-column="22" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/rpg-helper-app/src/Views/Characters.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="29" column="107" selection-start-line="29" selection-start-column="107" selection-end-line="29" selection-end-column="107" />
             </state>
           </provider>
         </entry>
@@ -151,6 +156,7 @@
         <option value="$PROJECT_DIR$/rpg-helper-app/src/index.js" />
         <option value="$PROJECT_DIR$/rpg-helper-app/src/Views/AddCharacter.js" />
         <option value="$PROJECT_DIR$/rpg-helper-app/src/App.js" />
+        <option value="$PROJECT_DIR$/rpg-helper-app/src/Views/Characters.js" />
       </list>
     </option>
   </component>
@@ -244,12 +250,12 @@
       <updated>1558876844595</updated>
       <workItem from="1558876852350" duration="1088000" />
       <workItem from="1558891272272" duration="8148000" />
-      <workItem from="1558958719477" duration="3591000" />
+      <workItem from="1558958719477" duration="4594000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12827000" />
+    <option name="totallyTimeSpent" value="13830000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1672" y="-8" width="1296" height="1000" extended-state="6" />
@@ -355,10 +361,17 @@
     <entry file="file://$PROJECT_DIR$/rpg-helper-app/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="366">
-          <caret line="83" column="128" selection-start-line="83" selection-start-column="128" selection-end-line="83" selection-end-column="128" />
+          <caret line="83" column="22" selection-start-line="83" selection-start-column="22" selection-end-line="83" selection-end-column="22" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rpg-helper-app/src/Views/Characters.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="29" column="107" selection-start-line="29" selection-start-column="107" selection-end-line="29" selection-end-column="107" />
         </state>
       </provider>
     </entry>
