@@ -186,6 +186,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .characterBox {
     background-color: #99FFBB;
+    width: 80%;
     margin: 2% auto;
 }
 
