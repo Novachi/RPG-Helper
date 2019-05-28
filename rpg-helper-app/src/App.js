@@ -37,7 +37,7 @@ class App extends Component {
     } catch(err){
       console.log(err);
     }
-  }
+  };
 
   getAllData = async () => {
     let urls = ["http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getRecordCount&tableName=skills",
@@ -50,7 +50,7 @@ class App extends Component {
      for(let i=0; i<urls.length; i++){
        await this.sendRequest(urls[i]);
      }
-  }
+  };
   
 
 
@@ -81,7 +81,7 @@ class App extends Component {
           <Route path="/session/add" component={AddSession}/>
           <Route path="/characters/:operation/:characterId" component={() => <AddCharacter nextCharacterId={followingCharacterId} skillCount={skillsNumber}/>}/>
           <Route exact path="/characters" component={() => <Characters characterCount={charactersNumber} sessionId={sessionId}/>}/>
-          <Route exact path="/characters/:characterId" component={CharacterDetails} />
+          <Route exact path="/characters/:id" render={(props) => <CharacterDetails {...props} skillCount={skillsNumber} />} />
           <Route path="/notes/:operation/:id" component={AddNote} />
       </Router>
     );

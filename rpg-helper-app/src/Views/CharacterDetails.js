@@ -1,4 +1,20 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
+class Skill extends Component{
+
+    render() {
+        return(
+            <div>
+                <h3 className="skillName">{this.props.skill.skillname}</h3>
+                <div><strong>Level:</strong> {this.props.skill.currentlevel}/{this.props.skill.maxlevel}</div>
+                <div><strong>Used stat:</strong> {this.props.skill.usedstat}</div>
+                <div><strong>Details:</strong> {this.props.skill.details}</div>
+                <div className="line"></div>
+            </div>
+        );
+    }
+}
 
 class Item extends Component {
     constructor(props){
@@ -39,13 +55,20 @@ class StatSection extends Component {
     }
 
     render(){
+        let id = "";
+        let stat;
+        if(this.props.character != undefined) {
+            id = this.props.statId;
+            stat = this.props.character[id];
+
+        }
         return(
             <div className="statsRow">
                 <div className={"statBox" + " " + "centeredColumn"}>{this.props.stat}</div>
                 <div className={"statBox" + " " + "centeredColumn" + " " + "hide"}>
                     <i class="fas fa-minus"></i>
                 </div>
-                <div className={"statBox" + " " + "centeredColumn"}>27</div>
+                <div className={"statBox" + " " + "centeredColumn"}>{stat}</div>
                 <div className={"statBox" + " " + "centeredColumn" + " " + "hide"}>
                     <i class="fas fa-plus"></i>
                 </div>
@@ -55,41 +78,73 @@ class StatSection extends Component {
 }
 
 class CharacterDetails extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            character: {},
+        }
+    }
+
+    createStats = () => {
+        let statNames = ["WS", "BS", "S", "T", "AG", "INT", "WP", "FEL", "A", "W", "SB", "TB", "M", "MAG", "IP", "FP"];
+        let statIds = ["weaponskill", "ballisticskill", "strength", "toughness", "agility", "intelligence", "willpower", "fellowship", "attacks", "wounds",
+            "strengthbonus","toughnessbonus","movement", "magic", "insanitypoints", "fatepoints"];
+        let stats = [];
+        for(let i=0; i<16; i++){
+            stats.push(<StatSection stat={statNames[i]} character={this.state.character} statId={statIds[i]}/>);
+        }
+
+        return stats;
+    };
+
+    createSkills = (start, stop) => {
+        let skills = [];
+        for(let i=start; i<stop; i++){
+            skills.push(<Skill skill={this.state.skills[i]}/>);
+        }
+
+        return skills;
+    };
+
+    getCharacter = () => {
+        let url = "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getCharacter&characterId=" + this.props.match.params.id;
+        axios.get(url).then((res) => this.setState({character: res.data[0]}));
+    };
+
+    getSkills = () => {
+        let url = "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getSkills&characterId=" + this.props.match.params.id;
+        axios.get(url).then((res) => this.setState({skills: res.data}));
+    };
+
+    componentDidMount() {
+        this.getCharacter();
+        this.getSkills();
+    }
+
     render(){
+        console.log(this.state.skills);
         return(
             <div className="topContainer">
                 <a href="/characters"><i class="fas fa-angle-left" id="goBackButton"></i></a>
-                <div className="centeredTopRow"><h1>Character Name</h1></div>
+                <div className="centeredTopRow"><h1>{this.state.character.name}</h1></div>
                 <div className="centeredColumn">
                     <div className="centeredRow">
-                        <img id="portrait" src="http://studioopinii.pl/wp-content/uploads/2013/02/glinski.jpg" width="200px" height="200px" alt="Character's ryj"/>
+                        <img id="portrait" src={this.state.character.imagesrc} width="200px" height="200px" alt="Character's image"/>
                     </div>
                     <div className="centeredRow">
                         <div className={"centeredColumn" + " " + "characterViewTopSection"}>
                             <div><strong>Player:</strong>Janek</div>
                             <hr></hr>
-                            <div><strong>Gender:</strong> Janek</div>
-                            <div><strong>Race:</strong> Janek</div>
-                            <div><strong>Class:</strong> Janek</div>
-                            <div><strong>Weight:</strong> Janek</div>
-                            <div><strong>Height:</strong> Janek</div>
-                            <div><strong>Age:</strong> Janek</div>
-                            <div><strong>Race:</strong> Janek</div>
-                            <div><strong>Misc:</strong>Janek Janek Janek Janek Alphangalfubengard JanekJanekJanekJanek</div>
+                            <div><strong>Gender:</strong> {this.state.character.gender}</div>
+                            <div><strong>Race:</strong> {this.state.character.race}</div>
+                            <div><strong>Class:</strong> {this.state.character.characterclass}</div>
+                            <div><strong>Weight:</strong> 123kg</div>
+                            <div><strong>Height:</strong> 123cm</div>
+                            <div><strong>Age:</strong> {this.state.character.age}</div>
+                            <div><strong>Misc:</strong>{this.state.character.additionalinfo}</div>
                         </div>
                         <div className={"centeredColumn" + " " + "characterViewTopSection"}>
-                            <textarea readOnly className="backgroundInfo">
-                                Janek urodził się w małej wiosce, już od małego był chujem.
-                                Janek urodził się w małej wiosce, już od małego był chujem.
-                                Janek urodził się w małej wiosce, już od małego był chujem.
-                                Janek urodził się w małej wiosce, już od małego był chujem.
-                                Janek urodził się w małej wiosce, już od małego był chujem.
-                                Janek urodził się w małej wiosce, już od małego był chujem.
-                                Janek urodził się w małej wiosce, już od małego był chujem.
-                                Janek urodził się w małej wiosce, już od małego był chujem.
-                                Janek urodził się w małej wiosce, już od małego był chujem.
-                                Janek urodził się w małej wiosce, już od małego był chujem.
-                            </textarea>             
+                            <textarea readOnly className="backgroundInfo" value={this.state.character.background}/>
                         </div>
                     </div>
                     <div className="centeredRow">
@@ -97,22 +152,7 @@ class CharacterDetails extends Component {
                             <h1>Stats</h1>
                             <div className="statSection">
                                 <div id="stats">
-                                    <StatSection stat="WS"/>
-                                    <StatSection stat="BS"/>
-                                    <StatSection stat="S"/>
-                                    <StatSection stat="T"/>
-                                    <StatSection stat="AG"/>
-                                    <StatSection stat="INT"/>
-                                    <StatSection stat="WP"/>
-                                    <StatSection stat="FEL"/>
-                                    <StatSection stat="A"/>
-                                    <StatSection stat="W"/>
-                                    <StatSection stat="SB"/>
-                                    <StatSection stat="TB"/>
-                                    <StatSection stat="M"/>
-                                    <StatSection stat="MAG"/>
-                                    <StatSection stat="IP"/>
-                                    <StatSection stat="FP"/>
+                                    {this.createStats()}
                                 </div>
                             </div>
                         </div>
@@ -154,44 +194,18 @@ class CharacterDetails extends Component {
                     <h1 className="skillName">Skills</h1>
                     <div className="centeredRow">
                         <div className={"centeredColumn"  + " " + "characterViewTopSection"}>
-                            <div>
-                                <h3 className="skillName">Rozpierdalanie</h3>
-                                <div><strong>Level:</strong> 1/3</div>
-                                <div><strong>Used stat:</strong> WS</div>
-                                <div><strong>Details:</strong> Pozwala na rozpierdalanie przeciwnika, bo tak!</div>
-                                <div className="line"></div>
-                            </div>
-                            <div>
-                                <h3 className="skillName">Rozpierdalanie</h3>
-                                <div><strong>Level:</strong> 1/3</div>
-                                <div><strong>Used stat:</strong> WS</div>
-                                <div><strong>Details:</strong> Pozwala na rozpierdalanie przeciwnika, bo tak!</div>
-                                <div className="line"></div>
-                            </div>
+                            {this.createSkills(0,Math.ceil(this.props.skillCount/2))}
                         </div>
-                
+
                         <div className={"centeredColumn"  + " " + "characterViewTopSection"}>
-                            <div>
-                                <h3 className="skillName">Rozpierdalanie</h3>
-                                <div><strong>Level:</strong> 1/3</div>
-                                <div><strong>Used stat:</strong> WS</div>
-                                <div><strong>Details:</strong> Pozwala na rozpierdalanie przeciwnika, bo tak!  Pozwala na rozpierdalanie przeciwnika, bo tak!  Pozwala na rozpierdalanie przeciwnika, bo tak!  Pozwala na rozpierdalanie przeciwnika, bo tak!</div>
-                                <div className="line"></div>
-                            </div>
-                            <div>
-                                <h3 className="skillName">Rozpierdalanie</h3>
-                                <div><strong>Level:</strong> 1/3</div>
-                                <div><strong>Used stat:</strong> WS</div>
-                                <div><strong>Details:</strong> Pozwala na rozpierdalanie przeciwnika, bo tak!</div>
-                                <div className="line"></div>
-                            </div>
+                            {this.createSkills(Math.ceil(this.props.skillCount/2), this.props.skillCount)}
                         </div>
                     </div>
                     <div className="centeredRow">
-                        <label className={"button" + " " + "levelButton"}>Level Up!</label>
+                        <label className={"button" + " " + "levelButton"}><a href={"/characters/edit/" + this.props.match.params.id}>Edit</a></label>
                     </div>
                     <footer>
-                        <p>&#9400; 2019 Paszko Entertainment</p>
+                        <p>&#9400; 2019 Paszko&N0vv4k Entertainment</p>
                     </footer>
                 </div>
             </div>
