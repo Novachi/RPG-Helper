@@ -44,6 +44,12 @@ class ArmourStats extends Component{
 
 class Item extends Component {
 
+    deleteItem = () =>{
+        let url='http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=deleteItem&itemId=' + this.props.item.itemid;
+        axios.get(url).then(() => this.props.reload());
+
+    };
+
     renderStats = () => {
         if(this.props.itemType == 2){
             return <WeaponStats  item={this.props.item}/>
@@ -60,7 +66,7 @@ class Item extends Component {
                     <div className={"unchangableRow" + " " + "flexStart"}>
                         <p>{this.props.item.itemname}</p>
                         <div className="deleteItem">
-                            <i class="fas fa-minus"></i>
+                            <button className="editButton" onClick={this.deleteItem}><i class="fas fa-minus"></i></button>
                         </div>
                     </div>
                     <div className="details">
@@ -117,7 +123,15 @@ class CharacterDetails extends Component {
             weapons: [],
             armours: [],
         }
+
+        this.reload = this.reload.bind(this);
     }
+
+    reload(){
+        this.getItems();
+        this.getArmours();
+        this.getWeapons();
+    };
 
     createStats = () => {
         let statNames = ["WS", "BS", "S", "T", "AG", "INT", "WP", "FEL", "A", "W", "SB", "TB", "M", "MAG", "IP", "FP"];
@@ -148,17 +162,17 @@ class CharacterDetails extends Component {
         let items = [];
         if(this.state.items.length && type == 1){
             for(let i=0; i<this.state.items.length; i++){
-                items.push(<Item item={this.state.items[i]} itemType={1}/>);
+                items.push(<Item item={this.state.items[i]} itemType={1} reload={this.reload}/>);
             }
         }
         if(this.state.weapons.length && type == 2){
             for(let i=0; i<this.state.weapons.length; i++){
-                items.push(<Item item={this.state.weapons[i]} itemType={2}/>);
+                items.push(<Item item={this.state.weapons[i]} itemType={2} reload={this.reload}/>);
             }
         }
         if(this.state.armours.length && type == 3){
             for(let i=0; i<this.state.armours.length; i++){
-                items.push(<Item item={this.state.armours[i]} itemType={3}/>);
+                items.push(<Item item={this.state.armours[i]} itemType={3} reload={this.reload}/>);
             }
         }
 
@@ -196,14 +210,10 @@ class CharacterDetails extends Component {
         this.getItems();
         this.getWeapons();
         this.getArmours();
+        console.log(this.state);
     }
 
     render(){
-        console.log(this.state.skills);
-        console.log("I:");
-        console.log(this.state.items);
-        console.log(this.state.weapons);
-        console.log(this.state.armours);
         return(
             <div className="topContainer">
                 <a href="/characters"><i class="fas fa-angle-left" id="goBackButton"></i></a>

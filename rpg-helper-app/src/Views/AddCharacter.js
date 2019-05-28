@@ -173,8 +173,9 @@ class AddCharacter extends Component {
             </div>
             <div className="centeredColumn">
               <div className="centeredRow">
-                <form id="characterAdd" method="POST" action="http://v-ie.uek.krakow.pl/~s206775/addCharacter.php" encType="multipart/form-data">
+                <form id="characterAdd" method="POST" action="http://v-ie.uek.krakow.pl/~s206775/addEditCharacter.php" encType="multipart/form-data">
                   <input id="sessionId" name="sessionId" type="hidden" value={this.props.sessionId}/>
+                  <input name="operation" type="hidden" value={this.props.match.params.operation}/>
                   <div className={"centeredRow" + " " + "wrap"}>
                     <div className={"centeredColumn" + " " + "formSection" + " " + "justifyTop"}>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
