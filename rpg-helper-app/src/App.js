@@ -10,6 +10,7 @@ import AddCharacter from './Views/AddCharacter';
 import CharacterDetails from './Views/CharacterDetails';
 import axios from 'axios';
 import AddNote from './Views/AddNote';
+import AddItem from './Views/AddItem';
 
 class App extends Component {
   constructor(props){
@@ -44,7 +45,8 @@ class App extends Component {
             "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getRecordCount&tableName=characters",
             "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getRecordCount&tableName=notes",
             "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getLastId&tableName=notes",
-            "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getLastId&tableName=characters"
+            "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getLastId&tableName=characters",
+            "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getLastId&tableName=items"
             ];
 
      for(let i=0; i<urls.length; i++){
@@ -65,6 +67,7 @@ class App extends Component {
       var notesNumber = this.state.requestsData[2][0].count;
       var followingNoteId = this.state.requestsData[3][0].max == null ? 1 : this.state.requestsData[3][0].max;
       var followingCharacterId = this.state.requestsData[4][0].max == null ? 1 : this.state.requestsData[4][0].max+1;
+      var followingItemId = this.state.requestsData[5][0].max == null ? 1 : this.state.requestsData[5][0].max+1;
     }
 
       let regex = /session=\d+/g;
@@ -79,10 +82,11 @@ class App extends Component {
           />
           <Route exact path="/notes" component={() => <Notes notesCount={notesNumber} nextNoteId={followingNoteId} sessionId={sessionId}/>}/>
           <Route path="/session/add" component={AddSession}/>
-          <Route path="/characters/:operation/:characterId" component={() => <AddCharacter nextCharacterId={followingCharacterId} skillCount={skillsNumber}/>}/>
+          <Route exact path="/characters/:operation/:characterId" component={() => <AddCharacter nextCharacterId={followingCharacterId} skillCount={skillsNumber}/>}/>
           <Route exact path="/characters" component={() => <Characters characterCount={charactersNumber} sessionId={sessionId}/>}/>
           <Route exact path="/characters/:id" render={(props) => <CharacterDetails {...props} skillCount={skillsNumber} />} />
           <Route path="/notes/:operation/:id" component={AddNote} />
+          <Route exact path="/characters/:id/items/add" render={(props) => <AddItem {...props} nextItemId={followingItemId} />} />
       </Router>
     );
   }

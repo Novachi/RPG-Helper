@@ -193,6 +193,10 @@ class AddCharacter extends Component {
                         <input name="gold" className="inputField" type="number" id="gold"/>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
+                        <label htmlFor="player">Player:</label>
+                        <input name="player" className="inputField" type="text" id="player"/>
+                      </div>
+                      <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label>Character image(2MB):</label>
                         <input type="hidden" name="max_file_size" value="2000000"/>
                         <input type="file" name="imageSrc" id="imageSrc" accept=".png, .jpg, .jpeg"/>

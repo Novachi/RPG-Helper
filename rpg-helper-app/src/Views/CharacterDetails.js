@@ -16,11 +16,40 @@ class Skill extends Component{
     }
 }
 
+
+class WeaponStats extends Component{
+    render() {
+        return(
+            <div>
+                <span className="itemDef">Type: <span>{this.props.item.weapontype}</span></span><br></br>
+                <span className="itemAtk">Atk: <span>{this.props.item.weapondamage}</span> | </span>
+                <span className="itemDef">Def: <span>{this.props.item.weaponrange}</span></span><br></br>
+            </div>
+        );
+    }
+}
+
+class ArmourStats extends Component{
+    render() {
+        return(
+            <div>
+                
+                <span className="itemDef">Type: <span>{this.props.item.armourtype}</span></span><br></br>
+                <span className="itemDef">Def: <span>{this.props.item.armourdefence}</span></span><br></br>
+            </div>
+        );
+    }
+}
+
+
 class Item extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            items:[{itemName: "Siekierka rozpierdolu", atk:"21", def: "32", weight: "500", details: "Rozpierdalacz to bron, co rozpierdala."}]
+
+    renderStats = () => {
+        if(this.props.itemType == 2){
+            return <WeaponStats  item={this.props.item}/>
+        }
+        if(this.props.itemType == 3){
+            return <ArmourStats  item={this.props.item}/>
         }
     }
 
@@ -29,18 +58,18 @@ class Item extends Component {
             <div>
                 <div className="item">
                     <div className={"unchangableRow" + " " + "flexStart"}>
-                        <p>{this.state.items[0].itemName}</p>
+                        <p>{this.props.item.itemname}</p>
                         <div className="deleteItem">
                             <i class="fas fa-minus"></i>
                         </div>
                     </div>
                     <div className="details">
                         <p className="itemStats">
-                            <span className="itemAtk">Atk:<span>{this.state.items[0].atk}</span> | </span>
-                            <span className="itemDef">Def:<span>{this.state.items[0].def}</span> | </span>
-                            Weight: <span>{this.state.items[0].weight}</span> kg
+                            {this.renderStats()}
+                            Weight: <span>{this.props.item.weight}</span> kg
                         </p>
-                        <p>{this.state.items[0].details}</p>
+                        <p>{this.props.item.itemdescription}</p>
+                        <p>{this.props.item.misc}</p>
                     </div>
                 </div>
                 <div className="line"></div>
@@ -48,6 +77,7 @@ class Item extends Component {
         );
     }
 }
+
 
 class StatSection extends Component {
     constructor(props){
@@ -82,6 +112,10 @@ class CharacterDetails extends Component {
         super(props);
         this.state = {
             character: {},
+            skills: [],
+            items: [],
+            weapons: [],
+            armours: [],
         }
     }
 
@@ -99,12 +133,34 @@ class CharacterDetails extends Component {
 
     createSkills = (start, stop) => {
         let skills = [];
-        for(let i=start; i<stop; i++){
-            skills.push(<Skill skill={this.state.skills[i]}/>);
+        if(this.state.skills.length){
+            for(let i=start; i<stop; i++){
+                skills.push(<Skill skill={this.state.skills[i]}/>);
+            }
         }
-
         return skills;
     };
+
+    createItems = (type) =>{
+        let items = [];
+        if(this.state.items.length && type == 1){
+            for(let i=0; i<this.state.items.length; i++){
+                items.push(<Item item={this.state.items[i]} itemType={1}/>);
+            }
+        }
+        if(this.state.weapons.length && type == 2){
+            for(let i=0; i<this.state.weapons.length; i++){
+                items.push(<Item item={this.state.weapons[i]} itemType={2}/>);
+            }
+        }
+        if(this.state.armours.length && type == 3){
+            for(let i=0; i<this.state.armours.length; i++){
+                items.push(<Item item={this.state.armours[i]} itemType={3}/>);
+            }
+        }
+
+        return items;
+    }
 
     getCharacter = () => {
         let url = "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getCharacter&characterId=" + this.props.match.params.id;
@@ -116,13 +172,35 @@ class CharacterDetails extends Component {
         axios.get(url).then((res) => this.setState({skills: res.data}));
     };
 
+    getItems = () => {
+        let url = "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getItems&characterId=" + this.props.match.params.id;
+        axios.get(url).then((res) => this.setState({items: res.data}));
+    };
+
+    getWeapons = () => {
+        let url = "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getWeapons&characterId=" + this.props.match.params.id;
+        axios.get(url).then((res) => this.setState({weapons: res.data}));
+    };
+
+    getArmours = () => {
+        let url = "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getArmours&characterId=" + this.props.match.params.id;
+        axios.get(url).then((res) => this.setState({armours: res.data}));
+    };
+
     componentDidMount() {
         this.getCharacter();
         this.getSkills();
+        this.getItems();
+        this.getWeapons();
+        this.getArmours();
     }
 
     render(){
         console.log(this.state.skills);
+        console.log("I:");
+        console.log(this.state.items);
+        console.log(this.state.weapons);
+        console.log(this.state.armours);
         return(
             <div className="topContainer">
                 <a href="/characters"><i class="fas fa-angle-left" id="goBackButton"></i></a>
@@ -133,13 +211,13 @@ class CharacterDetails extends Component {
                     </div>
                     <div className="centeredRow">
                         <div className={"centeredColumn" + " " + "characterViewTopSection"}>
-                            <div><strong>Player:</strong>Janek</div>
+                            <div><strong>Player:</strong>{this.state.character.player}</div>
                             <hr></hr>
                             <div><strong>Gender:</strong> {this.state.character.gender}</div>
                             <div><strong>Race:</strong> {this.state.character.race}</div>
                             <div><strong>Class:</strong> {this.state.character.characterclass}</div>
-                            <div><strong>Weight:</strong> 123kg</div>
-                            <div><strong>Height:</strong> 123cm</div>
+                            <div><strong>Weight:</strong> {this.state.character.weight}</div>
+                            <div><strong>Height:</strong> {this.state.character.height}</div>
                             <div><strong>Age:</strong> {this.state.character.age}</div>
                             <div><strong>Misc:</strong>{this.state.character.additionalinfo}</div>
                         </div>
@@ -164,27 +242,21 @@ class CharacterDetails extends Component {
                                 <div className="inventorySection">
                                     <h3>Weapons</h3>
                                     <div className="thickLine"></div>
-                                    <Item />
-                                    <Item />
-                                    <Item />
+                                    {this.createItems(2)}
                                 </div>
                                 <div className="inventorySection">
                                     <h3>Armor</h3>
                                     <div className="thickLine"></div>
-                                    <Item />
-                                    <Item />
-                                    <Item />
+                                    {this.createItems(3)}
                                 </div>
                                 <div className="inventorySection">
                                     <h3>Misc</h3>
                                     <div className="thickLine"></div>
-                                    <Item />
-                                    <Item />
-                                    <Item />
+                                    {this.createItems(1)}
                                 </div>
                                 <div className={"unchangableRow" + " " + "flexEnd"}>
                                     <div className={"unchangableRow" + " " + "flexEnd"}>
-                                        <i class="fas fa-plus"></i>
+                                    <div><a class="fas fa-plus" href={"/characters/" + this.props.match.params.id + "/items/add"}></a> </div>
                                     </div>
                                 </div>
                             </div>
