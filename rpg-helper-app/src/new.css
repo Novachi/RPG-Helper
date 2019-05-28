@@ -1,0 +1,413 @@
+/* CSS preset */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    width: 100%;
+    height: 100%;;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background-image: url("./resources/images/bg.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#root {
+    height: 100%;
+}
+
+a {
+    display: inline-block;
+    text-decoration: none;
+    width:100%;
+    color:black;
+}
+
+a:visited{
+    color:black;
+}
+
+h1{
+    text-align: center;
+}
+
+footer {
+    text-align: right;
+    margin: 5px 5px;
+}
+
+#goBackButton {
+    position: absolute;
+    top: 7px;
+    left: 25px;
+    font-size: 4em;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+/* Containers used for positioning elements */
+
+.topContainer {
+    margin: 0 auto;
+    width: 60%;
+    min-height: 100%;
+    max-height: fit-content;
+    display: flex;
+    flex-direction: column;
+    background-color: #66BA99;
+}
+
+.centeredTopRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.centeredColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flexContainer {
+    display: flex;
+}
+
+.centeredRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.unchangableRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.menuBox {
+    margin: 0 5%;
+    min-height: 200px;
+    width: 200px;
+    text-align: center;
+}
+
+.justifyTop {
+    justify-content: flex-start;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .centeredRow {
+        flex-direction: column;
+    }
+
+    .formSection {
+        width: 94% !important;
+    }
+
+    .textAreaSection{
+        width: 94% !important;
+    }
+
+    .menuBox{
+        width: 94% !important;
+    }
+
+    .section{
+        width: 94% !important;
+    }
+
+    .addForm{
+        text-align: center;
+    }
+
+    .characterViewTopSection {
+        width: 94% !important;
+    }
+
+    .levelButton {
+        margin: 2% auto !important;
+        width: 94% !important;
+    }
+} 
+
+.flexEnd {
+    justify-content: flex-end;
+    width: 94%;
+}
+
+.flexStart {
+    justify-content: flex-start;
+}
+
+/* Main View Styles */
+
+.button{
+    user-select: none;
+    text-align: center;
+    display: inline-block;
+    width: 90%;
+    background-color: rgb(160, 160, 160);
+    border-radius: 10px;
+    border: 2px solid grey;
+}
+
+
+.button:hover, .editButton:hover{
+    background-color: grey;
+}
+
+.menuOption {
+    margin: 1.25% 0;
+}
+
+
+/* Characters view */
+
+.section {
+    width: 25%;
+    margin: 0 1.5%;
+}
+
+.sectionItem {
+    margin: 3% 0;
+}
+
+.characterBox {
+    background-color: #99FFBB;
+    width: 80%;
+    margin: 2% auto;
+}
+
+@media only screen and (max-width: 900px) {
+    div.characterBox div.section:nth-child(1){
+        display: none;
+    }
+}
+
+/* Notes View Styles */
+
+.tab {
+    padding-left: 20px;
+}
+
+#date {
+    font-size: 75%;
+    padding: 1% 0;
+}
+
+.note {
+    margin: 2% auto;
+    width: 96%;
+}
+
+.editButton {
+    user-select: none;
+    text-align: center;
+    width: 30px;
+    height:100%;
+    background-color: rgb(160, 160, 160);
+    border-radius: 2px;
+    border: 2px solid grey;
+    margin: 0 .2%;
+}
+
+.editField {
+    width:100%;
+    height:34px;
+}
+
+button.editButton{
+
+    font-size: 16px;
+}
+
+a.editButton{
+    margin: 0 2% 0 0;
+}
+
+#addButton{
+    width: 200px;
+}
+
+.addField {
+    width:100%;
+    text-align: right;
+}
+
+/* AddCharacters View Styles */
+.formSection {
+    width: 27.3%;
+    margin: 0 3%;
+}
+
+.textAreaSection {
+    width: 50%;
+    margin: 0 3%;
+}
+
+form#characterAdd {
+    width: 100%;
+}
+
+.detailsText {
+    resize: none;
+    width: 100%;
+    height: 200px;
+}
+
+.inputSpaceing {
+    margin-top: 5%;
+}
+
+.inputButtonSpaceing{
+    margin-top: 12.5%;
+}
+
+div.inputButtonSpaceing label.button{
+    width: 100%;
+}
+
+.statChangeButton:hover {
+    background-color: #227655;
+}
+
+.statChangeBox:active {
+    background-color: #005433;
+}
+
+/* Character Details View Styles */
+.characterViewTopSection {
+    width: 44%;
+    margin: 0 3%;
+    height: fit-content;
+}
+
+.backgroundInfo {
+    min-height: 200px;
+}
+
+.statBox {
+    width: 18%;
+    text-align: center;
+    padding: 3% 3%;
+    border: 1px solid black;
+}
+
+.hide {
+    display: none;
+}
+
+.statSection {
+    min-height: 600px;
+    max-height: fit-content;
+}
+
+#cap {
+    text-align: center;
+    font-weight: bold;
+}
+
+#itemBox {
+    border: 1px solid black;
+    max-height: fit-content;
+}
+
+.item {
+    margin: 1% 0;
+}
+
+.item p{
+    margin: 1% 0;
+}
+
+#stats {
+    margin: 10px 0;
+}
+
+label.levelButton{
+    padding: 1% 0;
+    width: 30%;
+    margin: 2% 0;
+}
+
+.inventory{
+    margin: 10px 0;
+    border: 1px solid black;
+}
+
+.line {
+    margin: 0 auto;
+    width: 50%;
+    border-bottom: 1px solid black;
+}
+
+.thickLine {
+    border-bottom: 2px solid black;
+}
+
+hr{
+    border:none;
+    border-radius: 30px;
+    background-color: rgba(0, 0, 0, .8);
+    height: 3px;
+}
+
+.skillName {
+    text-align: center;
+}
+
+.statsRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#portrait {
+    margin: 2% auto;
+}
+
+.deleteItem {
+    margin-left: 2%;
+}
+
+p.itemStats {
+    text-align: center;
+}
+
+.details {
+    justify-content: start;
+    flex-direction: column;
+    overflow: visible;
+    height: 0;
+    opacity: 0;
+    transition: height 0.5s, opacity 0.5s;
+}
+
+.unchangableRow:hover + div.details{
+    height: 100%;
+    opacity: 1;
+    margin: 0;
+    background-color:#449877 
+}
+
+/* AddNote view styles */
+
+#noteInput {
+    width: 300px;
+    height: 300px;  
+}
+
+
+
