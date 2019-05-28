@@ -72,19 +72,22 @@ class App extends Component {
 
       let regex = /session=\d+/g;
       let sessionId = parseInt(document.cookie.match(regex)[0].substring(8));
+      regex = /(?<=\d+:).+/g;
+      let sessionName = document.cookie.match(regex)[0];
+
     
     return (
       <Router>
           <Route exact path="/" component={Main}/>
           <Route
               path='/menu'
-              render={(props) => <SessionMenu {...props} nextCharacterId={followingCharacterId} />}
+              render={(props) => <SessionMenu {...props} nextCharacterId={followingCharacterId} sessionName={sessionName}/>}
           />
-          <Route exact path="/notes" component={() => <Notes notesCount={notesNumber} nextNoteId={followingNoteId} sessionId={sessionId}/>}/>
+          <Route exact path="/notes" component={() => <Notes notesCount={notesNumber} nextNoteId={followingNoteId} sessionId={sessionId} sessionName={sessionName}/>}/>
           <Route path="/session/add" component={AddSession}/>
-          <Route exact path="/characters/:operation/:characterId" component={() => <AddCharacter nextCharacterId={followingCharacterId} skillCount={skillsNumber}/>}/>
-          <Route exact path="/characters" component={() => <Characters characterCount={charactersNumber} sessionId={sessionId}/>}/>
-          <Route exact path="/characters/:id" render={(props) => <CharacterDetails {...props} skillCount={skillsNumber} />} />
+          <Route exact path="/characters/:operation/:characterId" component={(props) => <AddCharacter {...props} nextCharacterId={followingCharacterId} sessionId={sessionId} skillCount={skillsNumber} sessionName={sessionName}/>}/>
+          <Route exact path="/characters" render={(props) => <Characters {...props} characterCount={charactersNumber} sessionId={sessionId} sessionName={sessionName}/>}/>
+          <Route exact path="/characters/:id" component={(props) => <CharacterDetails {...props} skillCount={skillsNumber} />} />
           <Route path="/notes/:operation/:id" component={AddNote} />
           <Route exact path="/characters/:id/items/add" render={(props) => <AddItem {...props} nextItemId={followingItemId} />} />
       </Router>

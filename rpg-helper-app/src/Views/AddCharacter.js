@@ -142,9 +142,26 @@ class AddCharacter extends Component {
       });
   };
 
+  getCharacter = () => {
+    let url = "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getCharacter&characterId=" + this.props.match.params.id;
+    axios.get(url).then((res) => this.setState({character: res.data[0]}));
+  };
+
+  getCharacterSkills = () => {
+    let url = "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getSkills&characterId=" + this.props.match.params.id;
+    axios.get(url).then((res) => this.setState({characterSkills: res.data}));
+  };
+
+
   componentDidMount(){
+    if(this.props.match.params.operation == "edit"){
+      this.getCharacter();
+      this.getCharacterSkills();
+    }
     this.getSkills();
   }
+
+
 
   render() {
       console.log(this.props.nextCharacterId);
@@ -152,12 +169,12 @@ class AddCharacter extends Component {
         <div className="topContainer">
           <a href="/menu"><i className="fas fa-angle-left" id="goBackButton"></i></a>
             <div className="centeredTopRow">
-              <h1>Add Character to {document.cookie.substring(10)}</h1>
+              <h1>Add Character to {this.props.sessionName}</h1>
             </div>
             <div className="centeredColumn">
               <div className="centeredRow">
                 <form id="characterAdd" method="POST" action="http://v-ie.uek.krakow.pl/~s206775/addCharacter.php" encType="multipart/form-data">
-                  <input id="sessionId" name="sessionId" type="hidden" value={this.state.character.sessionId}/>
+                  <input id="sessionId" name="sessionId" type="hidden" value={this.props.sessionId}/>
                   <div className={"centeredRow" + " " + "wrap"}>
                     <div className={"centeredColumn" + " " + "formSection" + " " + "justifyTop"}>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>

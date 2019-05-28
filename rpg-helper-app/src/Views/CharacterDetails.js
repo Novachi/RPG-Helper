@@ -23,7 +23,7 @@ class WeaponStats extends Component{
             <div>
                 <span className="itemDef">Type: <span>{this.props.item.weapontype}</span></span><br></br>
                 <span className="itemAtk">Atk: <span>{this.props.item.weapondamage}</span> | </span>
-                <span className="itemDef">Def: <span>{this.props.item.weaponrange}</span></span><br></br>
+                <span className="itemDef">Range: <span>{this.props.item.weaponrange}</span></span><br></br>
             </div>
         );
     }
@@ -133,11 +133,14 @@ class CharacterDetails extends Component {
 
     createSkills = (start, stop) => {
         let skills = [];
-        if(this.state.skills.length){
+
             for(let i=start; i<stop; i++){
-                skills.push(<Skill skill={this.state.skills[i]}/>);
+                if(this.state.skills[i] != undefined){
+                    console.log(i);
+                    skills.push(<Skill skill={this.state.skills[i]}/>);
+                }
             }
-        }
+
         return skills;
     };
 
@@ -235,10 +238,8 @@ class CharacterDetails extends Component {
                             </div>
                         </div>
                         <div className={"centeredColumn" + " " + "characterViewTopSection"}>
-                            <h1>Inventory</h1>
-                            <div className={"statSection" + " " + "inventory"}>
-                                <div id="cap">Cap: 25/67 kg</div>
-                                <div className="thickLine"></div>
+                            <h1>Inventory <button className="editButton"><a className="fas fa-plus" href={"/characters/" + this.props.match.params.id + "/items/add"}></a></button></h1>
+                            <div className={"itemSection" + " " + "inventory"}>
                                 <div className="inventorySection">
                                     <h3>Weapons</h3>
                                     <div className="thickLine"></div>
@@ -254,23 +255,14 @@ class CharacterDetails extends Component {
                                     <div className="thickLine"></div>
                                     {this.createItems(1)}
                                 </div>
-                                <div className={"unchangableRow" + " " + "flexEnd"}>
-                                    <div className={"unchangableRow" + " " + "flexEnd"}>
-                                    <div><a class="fas fa-plus" href={"/characters/" + this.props.match.params.id + "/items/add"}></a> </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
 
                     <h1 className="skillName">Skills</h1>
                     <div className="centeredRow">
-                        <div className={"centeredColumn"  + " " + "characterViewTopSection"}>
-                            {this.createSkills(0,Math.ceil(this.props.skillCount/2))}
-                        </div>
-
-                        <div className={"centeredColumn"  + " " + "characterViewTopSection"}>
-                            {this.createSkills(Math.ceil(this.props.skillCount/2), this.props.skillCount)}
+                        <div className={"centeredColumn"  + " " + "characterViewTopSection" + " skills"}>
+                            {this.createSkills(0,Math.ceil(this.props.skillCount))}
                         </div>
                     </div>
                     <div className="centeredRow">
