@@ -70,11 +70,14 @@ class App extends Component {
       var followingItemId = this.state.requestsData[5][0].max == null ? 1 : this.state.requestsData[5][0].max+1;
     }
 
-      let regex = /session=\d+/g;
-      let sessionId = parseInt(document.cookie.match(regex)[0].substring(8));
-      regex = /(?<=\d+:).+/g;
-      let sessionName = document.cookie.match(regex)[0];
-
+        let sessionId = 1;
+        let sessionName = "";
+        if(document.cookie != undefined){
+          let regex = /session=\d+/g;
+          sessionId = parseInt(document.cookie.match(regex)[0].substring(8));
+          regex = /(?<=\d+:).+/g;
+           sessionName = document.cookie.match(regex)[0];
+        }
     
     return (
       <Router>
