@@ -230,6 +230,7 @@ class CharacterDetails extends Component {
                             <div><strong>Gender:</strong> {this.state.character.gender}</div>
                             <div><strong>Race:</strong> {this.state.character.race}</div>
                             <div><strong>Class:</strong> {this.state.character.characterclass}</div>
+                            <div><strong>Exp:</strong> {this.state.character.experience}</div>
                             <div><strong>Weight:</strong> {this.state.character.weight}</div>
                             <div><strong>Height:</strong> {this.state.character.height}</div>
                             <div><strong>Age:</strong> {this.state.character.age}</div>
@@ -270,7 +271,13 @@ class CharacterDetails extends Component {
                             </div>
                         </div>
                     </div>
-
+                    <div className="centeredRow">
+                        <form method="POST" action="http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=lvlUp" >
+                            <input type="hidden" name="characterid" value={this.props.match.params.id} />
+                            <input type="hidden" name="experience" value={this.state.character.experience} />
+                            <input className={"button" + " " + "addExp"} type="submit" value=" LVL UP "></input>
+                        </form>
+                    </div>
                     <h1 className="skillName">Skills</h1>
                     <div className="centeredRow">
                         <div className={"centeredColumn"  + " " + "characterViewTopSection" + " skills"}>

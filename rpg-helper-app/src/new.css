@@ -417,6 +417,11 @@ div.skills {
     background-color:#449877 
 }
 
+.addExp {
+    width: 150px;
+    height: 25px;
+}
+
 /* AddNote view styles */
 
 #noteInput {

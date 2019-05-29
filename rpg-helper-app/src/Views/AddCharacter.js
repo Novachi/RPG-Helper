@@ -274,6 +274,4 @@ class AddCharacter extends Component {
     }
   }
 
-
-
 export default AddCharacter;
