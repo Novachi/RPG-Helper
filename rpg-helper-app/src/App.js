@@ -72,7 +72,7 @@ class App extends Component {
 
         let sessionId = 1;
         let sessionName = "";
-        if(document.cookie != undefined){
+        if(document.cookie != ""){
           let regex = /session=\d+/g;
           sessionId = parseInt(document.cookie.match(regex)[0].substring(8));
           regex = /(?<=\d+:).+/g;
