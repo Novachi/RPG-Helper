@@ -60,7 +60,7 @@ class SkillInput extends Component {
     else{
       for(let i = 0; i < this.props.characterSkills.length; i++){
         if((this.props.skill != undefined ? this.props.skill.skillname : "WOW") == this.props.characterSkills[i].skillname){
-          return <input type="checkbox" name="skills[]" id="skills[]" value={this.props.skill != undefined ? this.props.skill.skillname : "WOW"} checked="checked"></input>
+          return <input type="checkbox" name="skills[]" id="skills[]" value={this.props.skill != undefined ? this.props.skill.skillname : "WOW"} defaultChecked></input>
         }
       }
       return <input type="checkbox" name="skills[]"  value={this.props.skill != undefined ? this.props.skill.skillname : "WOW"}></input>

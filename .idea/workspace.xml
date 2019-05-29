@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="02f1938e-61e9-49f6-8140-0c7dbb2f4757" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpg-helper-app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/rpg-helper-app/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpg-helper-app/src/Views/AddCharacter.js" beforeDir="false" afterPath="$PROJECT_DIR$/rpg-helper-app/src/Views/AddCharacter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpg-helper-app/src/Views/CharacterDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/rpg-helper-app/src/Views/CharacterDetails.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,7 +19,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rpg-helper-app/src/Views/Notes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
+            <state relative-caret-position="136">
               <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="13" selection-end-column="6" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
@@ -53,7 +51,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rpg-helper-app/src/Views/CharacterDetails.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-572">
+            <state relative-caret-position="3655">
               <caret line="216" column="42" selection-start-line="216" selection-start-column="42" selection-end-line="216" selection-end-column="42" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
@@ -70,7 +68,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rpg-helper-app/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="635">
+            <state relative-caret-position="1292">
               <caret line="88" column="51" selection-start-line="88" selection-start-column="51" selection-end-line="88" selection-end-column="51" />
             </state>
           </provider>
@@ -112,8 +110,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rpg-helper-app/src/Views/AddCharacter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-45">
-              <caret line="189" column="80" selection-start-line="189" selection-start-column="80" selection-end-line="189" selection-end-column="80" />
+            <state relative-caret-position="262">
+              <caret line="62" column="159" selection-start-line="62" selection-start-column="159" selection-end-line="62" selection-end-column="159" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -258,12 +256,13 @@
       <workItem from="1559029921088" duration="5478000" />
       <workItem from="1559069467793" duration="4770000" />
       <workItem from="1559077054161" duration="3706000" />
-      <workItem from="1559120099271" duration="5437000" />
+      <workItem from="1559120099271" duration="5824000" />
+      <workItem from="1559127300200" duration="579000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40247000" />
+    <option name="totallyTimeSpent" value="41213000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1672" y="-8" width="1296" height="1000" extended-state="6" />
@@ -281,7 +280,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3298731" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3298731" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3298731" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -332,6 +331,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/rpg-helper-app/src/Views/Notes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="13" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/rpg-helper-app/src/new.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3706">
@@ -339,8 +348,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/rpg-helper-app/src/Views/AddSession.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rpg-helper-app/src/Views/CharacterDetails.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3655">
+          <caret line="216" column="42" selection-start-line="216" selection-start-column="42" selection-end-line="216" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/rpg-helper-app/src/Views/AddItem.js">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rpg-helper-app/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1292">
+          <caret line="88" column="51" selection-start-line="88" selection-start-column="51" selection-end-line="88" selection-end-column="51" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/rpg-helper-app/src/Views/Characters.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -369,46 +404,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rpg-helper-app/src/Views/AddSession.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rpg-helper-app/src/Views/Notes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="13" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rpg-helper-app/src/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="635">
-          <caret line="88" column="51" selection-start-line="88" selection-start-column="51" selection-end-line="88" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rpg-helper-app/src/Views/CharacterDetails.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-572">
-          <caret line="216" column="42" selection-start-line="216" selection-start-column="42" selection-end-line="216" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/rpg-helper-app/src/Views/AddCharacter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-45">
-          <caret line="189" column="80" selection-start-line="189" selection-start-column="80" selection-end-line="189" selection-end-column="80" />
+        <state relative-caret-position="262">
+          <caret line="62" column="159" selection-start-line="62" selection-start-column="159" selection-end-line="62" selection-end-column="159" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
