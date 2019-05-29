@@ -41,7 +41,7 @@ class Characters extends Component {
         super(props);
         this.state = {
             characters: [],
-        }
+        };
 
         this.reload = this.reload.bind(this);
     }
@@ -81,10 +81,11 @@ class Characters extends Component {
 
     render() {
       return (
+          
         <div className="topContainer">
                 <a href="/menu"><i class="fas fa-angle-left" id="goBackButton"></i></a>
                 <div className="centeredTopRow">
-                    <h1>{document.cookie.substring(10)} - Characters</h1>
+                    <h1>{this.props.sessionName} - Characters</h1>
                 </div>
                 <div className="centeredColumn">
                     {this.createCharacterFields()}

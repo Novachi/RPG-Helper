@@ -78,7 +78,7 @@ class Notes extends Component {
                     <a href="/menu"><i className="fas fa-angle-left" id="goBackButton"></i></a>
 
                     <div className="centeredTopRow">
-                            <h1>{document.cookie.substring(10)}</h1>
+                            <h1>{this.props.sessionName}</h1>
                     </div>
 
                     <div className="centeredColumn">

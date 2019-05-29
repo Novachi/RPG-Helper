@@ -10,6 +10,7 @@ import AddCharacter from './Views/AddCharacter';
 import CharacterDetails from './Views/CharacterDetails';
 import axios from 'axios';
 import AddNote from './Views/AddNote';
+import AddItem from './Views/AddItem';
 
 class App extends Component {
   constructor(props){
@@ -44,7 +45,8 @@ class App extends Component {
             "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getRecordCount&tableName=characters",
             "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getRecordCount&tableName=notes",
             "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getLastId&tableName=notes",
-            "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getLastId&tableName=characters"
+            "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getLastId&tableName=characters",
+            "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getLastId&tableName=items"
             ];
 
      for(let i=0; i<urls.length; i++){
@@ -65,24 +67,29 @@ class App extends Component {
       var notesNumber = this.state.requestsData[2][0].count;
       var followingNoteId = this.state.requestsData[3][0].max == null ? 1 : this.state.requestsData[3][0].max;
       var followingCharacterId = this.state.requestsData[4][0].max == null ? 1 : this.state.requestsData[4][0].max+1;
+      var followingItemId = this.state.requestsData[5][0].max == null ? 1 : this.state.requestsData[5][0].max+1;
     }
 
       let regex = /session=\d+/g;
       let sessionId = parseInt(document.cookie.match(regex)[0].substring(8));
+      regex = /(?<=\d+:).+/g;
+      let sessionName = document.cookie.match(regex)[0];
+
     
     return (
       <Router>
           <Route exact path="/" component={Main}/>
           <Route
               path='/menu'
-              render={(props) => <SessionMenu {...props} nextCharacterId={followingCharacterId} />}
+              render={(props) => <SessionMenu {...props} nextCharacterId={followingCharacterId} sessionName={sessionName}/>}
           />
-          <Route exact path="/notes" component={() => <Notes notesCount={notesNumber} nextNoteId={followingNoteId} sessionId={sessionId}/>}/>
+          <Route exact path="/notes" component={() => <Notes notesCount={notesNumber} nextNoteId={followingNoteId} sessionId={sessionId} sessionName={sessionName}/>}/>
           <Route path="/session/add" component={AddSession}/>
-          <Route path="/characters/:operation/:characterId" component={() => <AddCharacter nextCharacterId={followingCharacterId} skillCount={skillsNumber}/>}/>
-          <Route exact path="/characters" component={() => <Characters characterCount={charactersNumber} sessionId={sessionId}/>}/>
-          <Route exact path="/characters/:id" render={(props) => <CharacterDetails {...props} skillCount={skillsNumber} />} />
+          <Route exact path="/characters/:operation/:characterId" component={(props) => <AddCharacter {...props} nextCharacterId={followingCharacterId} sessionId={sessionId} skillCount={skillsNumber} sessionName={sessionName}/>}/>
+          <Route exact path="/characters" component={(props) => <Characters {...props} characterCount={charactersNumber} sessionId={sessionId} sessionName={sessionName}/>}/>
+          <Route exact path="/characters/:id" component={(props) => <CharacterDetails {...props} skillCount={skillsNumber} />} />
           <Route path="/notes/:operation/:id" component={AddNote} />
+          <Route exact path="/characters/:id/items/add" render={(props) => <AddItem {...props} nextItemId={followingItemId} />} />
       </Router>
     );
   }
