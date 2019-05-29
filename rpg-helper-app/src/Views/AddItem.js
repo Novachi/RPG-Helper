@@ -12,8 +12,6 @@ class Item extends Component {
             <div className="centeredColumn">   
                 <input type="hidden" name="characterId" value={this.props.characetrId} /> 
                 <input type="hidden" name="itemId" value={this.props.nextItemId} /> 
-                {console.log("kID:"+this.props.nextItemId)}
-                {console.log("chID:"+this.props.characetrId)}
                 <input type="hidden" name="itemType" value={document.cookie.substring(9)[0]} /> 
                 <label >Name:</label>
                 <input name="itemName" className="inputField" type="text" id="itemName"></input>

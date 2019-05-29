@@ -31,7 +31,7 @@ class StatInput extends Component {
           <div className={"statBox" + " " + "centeredColumn" + " " + "statChangeButton"} id={"-" + this.props.id} onClick={this.handleButtonChange}>
             <i className="fas fa-minus"></i>
           </div>
-          <input name={this.props.id} className={"inputField" + " " + "statBox"} type="number" id={this.props.id} value="0"></input>
+          <input name={this.props.id} className={"inputField" + " " + "statBox"} type="number" id={this.props.id} value={this.props.character[this.props.id.toLowerCase()]}></input>
           <div className={"statBox" + " " + "centeredColumn" + " " + "statChangeButton"} id={"+" + this.props.id} onClick={this.handleButtonChange}>
               <i className="fas fa-plus"></i>
           </div>
@@ -44,15 +44,34 @@ class StatInput extends Component {
   }
 }
 
+
+
+
 class SkillInput extends Component {
   constructor(props){
     super(props);
   }
 
+
+  skillVerification = () => {
+    if(this.props.characterSkills.length == 0){
+      return <input type="checkbox" name="skills[]" value={this.props.skill != undefined ? this.props.skill.skillname : "WOW"}></input>
+    }
+    else{
+      for(let i = 0; i < this.props.characterSkills.length; i++){
+        if((this.props.skill != undefined ? this.props.skill.skillname : "WOW") == this.props.characterSkills[i].skillname){
+          return <input type="checkbox" name="skills[]" id="skills[]" value={this.props.skill != undefined ? this.props.skill.skillname : "WOW"} checked="checked"></input>
+        }
+      }
+      return <input type="checkbox" name="skills[]"  value={this.props.skill != undefined ? this.props.skill.skillname : "WOW"}></input>
+    }
+  }
+
   render(){
     return(
       <div>
-        <h3 className="skillName"><input type="checkbox" name="skills[]" value={this.props.skill != undefined ? this.props.skill.skillname : "WOW"}></input>{this.props.skill != undefined ? this.props.skill.skillname : "WOW"}</h3>
+        
+        <h3 className="skillName">{this.skillVerification()}{this.props.skill != undefined ? this.props.skill.skillname : "WOW"}</h3>
         <div><strong>Used stat:</strong> {this.props.skill != undefined ?this.props.skill.usedstat : "WOW"}</div>
         <div><strong>Details:</strong> {this.props.skill != undefined ?this.props.skill.details : "WOW"}</div>
         <div className="line"></div>
@@ -60,6 +79,10 @@ class SkillInput extends Component {
     );
   }
 }
+
+
+
+
 
 
 class AddCharacter extends Component {
@@ -70,29 +93,33 @@ class AddCharacter extends Component {
         sessionId: parseInt(document.cookie.substring(8,9)),
         name: "",
         race: "",
+        characterclass: "",
         gender: "",
         age: 0,
-        weaponSkill: 0,
-        ballisticSkill: 0,
+        height: 0,
+        weight: 0,
+        player: "",
+        weaponskill: 0,
+        ballisticskill: 0,
         strength: 0,
         toughness: 0,
         agility: 0,
         intelligence: 0,
-        willPower: 0,
+        willpower: 0,
         fellowship: 0,
         attacks: 0,
         wounds: 0,
-        strengthBonus: 0,
-        toughnessBonus: 0,
+        strengthbonus: 0,
+        toughnessbonus: 0,
         movement: 0,
         magic: 0,
-        insanityPoints: 0,
-        fatePoints: 0,
+        insanitypoints: 0,
+        fatepoints: 0,
         experience: 0,
         gold: 0,
-        imageSrc: "",
+        imagesrc: "",
         background: "",
-        additionalInfo: "",
+        additionalinfo: "",
         skills: [],
       },
       skills: [],
@@ -101,6 +128,7 @@ class AddCharacter extends Component {
        "Attacks", "Magic", " Insanity Points", "Fate Points"],
       statIds: ["weaponSkill", "ballisticSkill", "strength", "toughness", "agility", "intelligence", "willPower", "fellowship", "wounds",
        "attacks", "magic", "insanityPoints", "fatePoints", "name", "gender", "age", "race", "class", "height", "weight", "gold", "background", "additionalInfo"],
+      characterSkills: [],
     };
     this.handleRandomizeAllButton = this.handleRandomizeAllButton.bind(this);
   }
@@ -109,7 +137,7 @@ class AddCharacter extends Component {
     let inputs = [];
     let stop = start===0 ? 7 : 13;
     for (let i = start; i < stop; i++) {
-      inputs.push(<StatInput stat={this.state.statNames[i]} id={this.state.statIds[i]} />);
+      inputs.push(<StatInput stat={this.state.statNames[i]} id={this.state.statIds[i]} character={this.state.character}/>);
     }
 
     return inputs;
@@ -119,7 +147,7 @@ class AddCharacter extends Component {
     let skillInputs = [];
     for(let i = start; i < stop; i++){
       if(this.state.skills != undefined){
-        skillInputs.push(<SkillInput skill={this.state.skills[i]} />);
+        skillInputs.push(<SkillInput skill={this.state.skills[i]} characterSkills={this.state.characterSkills} />);
       }
     }
 
@@ -128,7 +156,7 @@ class AddCharacter extends Component {
 
   handleRandomizeAllButton(event){
     for(let i=0; i<13; i++){
-      let val = Math.floor(Math.random() * 41) + 10;
+      let val = Math.floor(Math.random() * 31) + 20;
       document.getElementById(this.state.statIds[i]).value = val;
     }
   }
@@ -143,12 +171,12 @@ class AddCharacter extends Component {
   };
 
   getCharacter = () => {
-    let url = "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getCharacter&characterId=" + this.props.match.params.id;
+    let url = "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getCharacter&characterId=" + this.props.match.params.characterId;
     axios.get(url).then((res) => this.setState({character: res.data[0]}));
   };
 
   getCharacterSkills = () => {
-    let url = "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getSkills&characterId=" + this.props.match.params.id;
+    let url = "http://v-ie.uek.krakow.pl/~s206775/db_operations.php?operation=getSkills&characterId=" + this.props.match.params.characterId;
     axios.get(url).then((res) => this.setState({characterSkills: res.data}));
   };
 
@@ -162,9 +190,11 @@ class AddCharacter extends Component {
   }
 
 
-
   render() {
-      console.log(this.props.nextCharacterId);
+    console.log("CH:");
+      console.log(this.state.character);
+      console.log(this.state.characterSkills);
+
     return (
         <div className="topContainer">
           <a href="/menu"><i className="fas fa-angle-left" id="goBackButton"></i></a>
@@ -180,39 +210,39 @@ class AddCharacter extends Component {
                     <div className={"centeredColumn" + " " + "formSection" + " " + "justifyTop"}>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="name">Name:</label>
-                        <input name="name" className="inputField" type="text" id="name"/>
+                        <input name="name" className="inputField" type="text" id="name" defaultValue={this.state.character.name}/>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="sex">Gender:</label>
-                        <input name="gender" className="inputField" type="text" id="gender"/>
+                        <input name="gender" className="inputField" type="text" id="gender" defaultValue={this.state.character.gender}/>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="age">Age:</label>
-                        <input name="age" className="inputField" type="text" id="age"/>
+                        <input name="age" className="inputField" type="number" id="age" defaultValue={this.state.character.age}></input>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="Race">Race:</label>
-                        <input name="race" className="inputField" type="text" id="race"/>
+                        <input name="race" className="inputField" type="text" id="race" defaultValue={this.state.character.race}/>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="class">Class:</label>
-                        <input name="class" className="inputField" type="text" id="class"/>
+                        <input name="class" className="inputField" type="text" id="class" defaultValue={this.state.character.characterclass}/>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="height">Height(cm):</label>
-                        <input name="height" className="inputField" type="number" id="height"/>
+                        <input name="height" className="inputField" type="number" id="height" defaultValue={this.state.character.height}/>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="weight">Weight(kg):</label>
-                        <input name="weight" className="inputField" type="number" id="weight"/>
+                        <input name="weight" className="inputField" type="number" id="weight" defaultValue={this.state.character.weight}/>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="gold">Gold:</label>
-                        <input name="gold" className="inputField" type="number" id="gold"/>
+                        <input name="gold" className="inputField" type="number" id="gold" defaultValue={this.state.character.gold}/>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label htmlFor="player">Player:</label>
-                        <input name="player" className="inputField" type="text" id="player"/>
+                        <input name="player" className="inputField" type="text" id="player" defaultValue={this.state.character.player}/>
                       </div>
                       <div className={"centeredColumn" + " " + "inputSpaceing"}>
                         <label>Character image(2MB):</label>
@@ -233,14 +263,13 @@ class AddCharacter extends Component {
                   <div className="centeredRow">
                     <div className={"centeredColumn" + " " + "textAreaSection" + " " + "inputSpaceing"}>
                         <label htmlFor="background">Background:</label>
-                        <textarea name="background" className="detailsText" id="background"></textarea>
+                        <textarea name="background" className="detailsText" id="background" defaultValue={this.state.character.background}></textarea>
                     </div>
                     <div className={"centeredColumn" + " " + "textAreaSection" + " " + "inputSpaceing"}>
                         <label htmlFor="misc">Additional info:</label>
-                        <textarea name="additionalInfo" className="detailsText" id="additionalInfo"></textarea>
+                        <textarea name="additionalInfo" className="detailsText" id="additionalInfo" defaultValue={this.state.character.additionalinfo}></textarea>
                     </div>
                   </div>
-                  
                   <h1 className="skillName">Skills</h1>
                     <div className="centeredRow">
                         <div className={"centeredColumn"  + " " + "characterViewTopSection"}>
