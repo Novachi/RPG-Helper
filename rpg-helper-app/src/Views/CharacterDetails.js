@@ -214,6 +214,7 @@ class CharacterDetails extends Component {
     }
 
     render(){
+        console.log(this.state.character);
         return(
             <div className="topContainer">
                 <a href="/characters"><i class="fas fa-angle-left" id="goBackButton"></i></a>
@@ -232,6 +233,7 @@ class CharacterDetails extends Component {
                             <div><strong>Weight:</strong> {this.state.character.weight}</div>
                             <div><strong>Height:</strong> {this.state.character.height}</div>
                             <div><strong>Age:</strong> {this.state.character.age}</div>
+                            <div><strong>Gold:</strong> {this.state.character.gold}</div>
                             <div><strong>Misc:</strong>{this.state.character.additionalinfo}</div>
                         </div>
                         <div className={"centeredColumn" + " " + "characterViewTopSection"}>

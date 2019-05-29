@@ -86,7 +86,7 @@ class App extends Component {
           <Route exact path="/notes" component={() => <Notes notesCount={notesNumber} nextNoteId={followingNoteId} sessionId={sessionId} sessionName={sessionName}/>}/>
           <Route path="/session/add" component={AddSession}/>
           <Route exact path="/characters/:operation/:characterId" component={(props) => <AddCharacter {...props} nextCharacterId={followingCharacterId} sessionId={sessionId} skillCount={skillsNumber} sessionName={sessionName}/>}/>
-          <Route exact path="/characters" render={(props) => <Characters {...props} characterCount={charactersNumber} sessionId={sessionId} sessionName={sessionName}/>}/>
+          <Route exact path="/characters" component={(props) => <Characters {...props} characterCount={charactersNumber} sessionId={sessionId} sessionName={sessionName}/>}/>
           <Route exact path="/characters/:id" component={(props) => <CharacterDetails {...props} skillCount={skillsNumber} />} />
           <Route path="/notes/:operation/:id" component={AddNote} />
           <Route exact path="/characters/:id/items/add" render={(props) => <AddItem {...props} nextItemId={followingItemId} />} />
